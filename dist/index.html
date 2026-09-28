@@ -312,6 +312,10 @@
     .inventory-item { padding: 12px; border-radius: 12px; background: #f7f9fc; border: 1px solid var(--line); }
     .inventory-item strong { display: block; font-size: 20px; letter-spacing: -.04em; }
     .inventory-item span { color: var(--muted); font-size: 11px; }
+    .topic-cloud { margin-top: 17px; padding-top: 15px; border-top: 1px solid var(--line); }
+    .topic-cloud strong { display: block; font-size: 12px; margin-bottom: 8px; }
+    .topic-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .topic-tag { color: var(--muted); background: #f4f6f8; border: 1px solid var(--line); border-radius: 99px; padding: 5px 8px; font-size: 11px; }
     .project-library { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
     .project-mini-card { border: 1px solid var(--line); border-radius: 14px; padding: 15px; background: #fff; display: flex; flex-direction: column; min-height: 205px; }
     .project-mini-card:hover { border-color: #c8d4e1; box-shadow: 0 8px 20px rgba(18,33,58,.05); }
@@ -536,6 +540,11 @@
         { text: '静态 HTML 已经能拿到所需字段，是否应该直接上 Playwright？', options: ['应该，工具越复杂越专业', '不必，先用更轻量的 HTTP + 解析方案', '改用无限多线程', '复制别人完整框架'], answer: 1, why: '浏览器自动化有更高成本；只有页面交互或 JS 渲染确实需要时再引入。', next: '复习静态与动态页面判断。' }
       ]}
     };
+    const topicMap = {
+      java: ['Java 语法', '集合与泛型', '对象职责', '文件与异常', '日志排错', 'SQL 约束', '事务', 'REST API', '参数校验', '权限', '状态机', '接口测试', 'Git 交付'],
+      python: ['解释器与路径', '函数与模块', 'CSV / JSON', '编码与日期', '数据清洗', '错误清单', 'HTTP API', '超时重试', '分页', '统计口径', '报表生成', '配置交付'],
+      crawler: ['来源边界', 'HTTP 请求', '状态码', 'HTML / JSON 解析', '字段字典', '分页停止', '限速', '有限重试', '唯一键', '去重增量', '动态页面', '日志核对', '数据质量']
+    };
     const unitExtras = {
       java: [
         ['知识：路径、终端、JDK、Git', '产出：Hello 程序 + 运行记录'],
@@ -602,6 +611,108 @@
       ]
     };
     Object.keys(questionBankAdditions).forEach(key => quizData[key].questions.push(...questionBankAdditions[key]));
+    const makeGeneratedQuestion = (topic, text, options, answer, why, next, difficulty) => ({ topic, text, options, answer, why, next, difficulty });
+    const generatedContexts = {
+      java: [
+        { domain: '设备台账', key: '设备编号', task: '按编号查询设备', rule: '编号不能重复', result: '逐行错误清单', failure: '重复提交' },
+        { domain: '会议室预约', key: '会议室和时间段', task: '判断时间是否冲突', rule: '同一时段不能重复预约', result: '预约确认', failure: '时间边界重叠' },
+        { domain: '借用管理', key: '设备与申请人', task: '提交借用申请', rule: '停用设备不能申请', result: '申请状态', failure: '设备已被借出' },
+        { domain: '校园报修', key: '工单编号', task: '分配维修工单', rule: '普通用户不能改派工单', result: '操作日志', failure: '权限不足' },
+        { domain: '课程作业', key: '学生和作业', task: '提交作业版本', rule: '截止后不能直接覆盖历史提交', result: '提交记录', failure: '重复提交' },
+        { domain: '库存管理', key: '商品 SKU', task: '扣减库存', rule: '库存不能变成负数', result: '库存流水', failure: '并发扣减' },
+        { domain: '订单服务', key: '订单号', task: '查询订单状态', rule: '状态变化必须符合流程', result: '订单详情', failure: '非法状态跳转' },
+        { domain: '图书借阅', key: '图书和读者', task: '归还图书', rule: '归还后库存状态恢复', result: '归还记录', failure: '重复归还' },
+        { domain: '社团活动', key: '报名编号', task: '统计报名人数', rule: '同一学生不能重复报名', result: '统计报表', failure: '重复报名' },
+        { domain: '实验室预约', key: '实验室和日期', task: '取消预约', rule: '只能取消自己的未开始预约', result: '取消结果', failure: '越权取消' },
+        { domain: '客户联系', key: '客户 ID', task: '记录跟进结果', rule: '敏感字段不能出现在普通日志', result: '跟进记录', failure: '数据泄露' },
+        { domain: '资产盘点', key: '资产标签', task: '导入盘点结果', rule: '缺失标签必须进入错误清单', result: '盘点报告', failure: '脏数据导入' },
+        { domain: '校园缴费', key: '缴费单号', task: '处理支付回调', rule: '同一回调重复到达不能重复记账', result: '支付状态', failure: '重复回调' },
+        { domain: '通知中心', key: '消息 ID', task: '发送未读通知', rule: '已读消息不能再次计入未读', result: '未读数量', failure: '状态不一致' },
+        { domain: '招聘投递', key: '候选人和岗位', task: '保存投递记录', rule: '同一岗位不能重复投递', result: '投递结果', failure: '重复投递' }
+      ],
+      python: [
+        { domain: '成绩表清洗', file: 'scores.csv', task: '合并多份成绩表', rule: '学号唯一', output: '错误行清单', bad: '缺失列' },
+        { domain: '实验数据', file: 'experiments.xlsx', task: '按日期汇总结果', rule: '日期格式统一', output: '汇总表', bad: '非法日期' },
+        { domain: '销售周报', file: 'orders.json', task: '计算净销售额', rule: '退款要按口径扣除', output: '周报文件', bad: '金额字段缺失' },
+        { domain: '文件归档', file: 'lab-files/', task: '按课程和日期整理文件', rule: '重名不能覆盖', output: '归档日志', bad: '非法文件名' },
+        { domain: '设备数据', file: 'devices.csv', task: '生成设备统计', rule: '停用设备单独统计', output: '统计结果', bad: '状态值未知' },
+        { domain: '课程签到', file: 'attendance.csv', task: '识别缺勤记录', rule: '同一学生每天只计一次', output: '缺勤名单', bad: '重复记录' },
+        { domain: '库存快照', file: 'stock.json', task: '比较两次库存', rule: 'SKU 作为稳定键', output: '变化清单', bad: 'SKU 缺失' },
+        { domain: '问卷结果', file: 'survey.csv', task: '清洗选择题答案', rule: '未知选项不能伪造', output: '质量报告', bad: '非法选项' },
+        { domain: '开放 API', file: 'api-response.json', task: '保存分页结果', rule: '失败页可补采', output: '原始数据包', bad: '超时' },
+        { domain: '课程目录', file: 'courses.json', task: '生成检索索引', rule: '课程 ID 唯一', output: '索引文件', bad: '重复 ID' },
+        { domain: '财务明细', file: 'expenses.csv', task: '按部门统计', rule: '金额单位明确', output: '部门报表', bad: '金额格式错误' },
+        { domain: '日志分析', file: 'app.log', task: '统计错误类型', rule: '时间范围固定', output: '分析摘要', bad: '日志行不完整' },
+        { domain: '图片素材', file: 'assets/', task: '批量改名和归档', rule: '原文件不能无记录删除', output: '操作清单', bad: '目标文件已存在' },
+        { domain: '活动报名', file: 'registrations.csv', task: '筛选有效报名', rule: '手机号格式需校验', output: '有效名单', bad: '重复手机号' },
+        { domain: '设备巡检', file: 'inspection.json', task: '生成逾期清单', rule: '统计时刻固定', output: '逾期报表', bad: '时区不明' }
+      ],
+      crawler: [
+        { domain: '练习站分页列表', source: '授权练习站', record: '条目 ID', task: '采集全部分页', rule: '空页后停止', failure: '页码重复' },
+        { domain: '公开课程目录', source: '公开官方页面', record: '课程链接', task: '保存课程信息', rule: '保留来源 URL', failure: '字段缺失' },
+        { domain: '开放数据接口', source: '授权 API', record: '数据 ID', task: '按页获取 JSON', rule: '记录请求时间', failure: '返回 429' },
+        { domain: '公告练习源', source: '授权公开公告', record: '公告编号', task: '识别新增公告', rule: '编号作为唯一键', failure: '内容更新' },
+        { domain: '图书练习站', source: '本地练习页面', record: 'ISBN', task: '解析书名作者', rule: '缺失作者要记录', failure: '页面结构变化' },
+        { domain: '城市开放数据', source: '公开数据接口', record: '站点 ID', task: '采集站点状态', rule: '只采集授权字段', failure: '响应超时' },
+        { domain: '商品练习数据', source: '自建模拟页面', record: '商品 SKU', task: '检查价格变化', rule: '保存抓取时间', failure: '价格字段为空' },
+        { domain: '赛事公开赛程', source: '授权公开页面', record: '比赛 ID', task: '提取赛程日期', rule: '日期格式统一', failure: '页面改版' },
+        { domain: '校园通知练习源', source: '模拟公开源', record: '通知 ID', task: '做增量采集', rule: '新增和更新分开', failure: '重复通知' },
+        { domain: '天气开放接口', source: '授权 API', record: '城市和日期', task: '保存天气结果', rule: '固定统计时刻', failure: '接口降级' },
+        { domain: '招聘模拟数据', source: '模拟练习站', record: '岗位 ID', task: '提取技能标签', rule: '不采集个人资料', failure: '标签缺失' },
+        { domain: '政策公开目录', source: '授权公开目录', record: '文号', task: '保存政策摘要', rule: '原文链接可追溯', failure: '摘要为空' },
+        { domain: '图片元数据练习', source: '本地练习资源', record: '文件名', task: '读取元数据', rule: '不上传文件', failure: '文件损坏' },
+        { domain: 'API 版本练习', source: '本地模拟 API', record: '资源 ID', task: '兼容两种响应', rule: '记录接口版本', failure: '字段改名' },
+        { domain: '数据质量练习', source: '授权样例数据', record: '组合唯一键', task: '检查重复缺失', rule: '输出质量报告', failure: '字段类型变化' }
+      ]
+    };
+    const generatedFamilies = {
+      java: [
+        c => makeGeneratedQuestion('集合选择', `${c.domain}要${c.task}，并且${c.rule}。哪种结构最适合先表达这个问题？`, ['Set / Map 等能表达约束的集合', '只用一个长字符串', '为每条记录写一个 if', '完全不保存中间结果'], 0, '先选择能表达业务关系的数据结构，再考虑实现细节。', `复习${c.domain}中的集合建模练习。`, '基础'),
+        c => makeGeneratedQuestion('输入校验', `${c.domain}收到${c.key}为空或格式不对的输入，第一步更合理的是？`, ['记录现象并按规则拒绝或进入错误清单', '当成正常值继续写入', '静默替换成随机值', '只在页面上变颜色'], 0, '输入校验要有明确反馈，不能让坏数据悄悄进入后续流程。', `为${c.domain}补充正常、缺失和非法输入样例。`, '基础'),
+        c => makeGeneratedQuestion('异常处理', `${c.domain}处理${c.failure}时，哪种做法更接近可维护代码？`, ['捕获合适的异常、保留上下文并给出可执行下一步', '所有异常都 except 后忽略', '返回成功掩盖失败', '让用户无限重复提交'], 0, '异常处理应该帮助定位和恢复，而不是隐藏事实。', `复习异常分类、日志上下文和恢复策略。`, '进阶'),
+        c => makeGeneratedQuestion('数据库约束', `为了在数据库层保护${c.rule}，更值得考虑什么？`, ['主键、UNIQUE、外键等与业务一致的约束', '把约束只写在注释里', '删除字段避免出错', '只依赖用户自觉'], 0, '代码校验之外，数据库约束能防止并发或其他入口写入坏数据。', `为${c.domain}画出表结构并写一条关键约束。`, '进阶'),
+        c => makeGeneratedQuestion('事务一致性', `${c.domain}完成${c.task}时，如果主记录成功但${c.result}写失败，优先考虑？`, ['让相关写入在明确的事务边界内保持一致', '忽略第二次失败', '返回成功并删除日志', '让用户重复点击'], 0, '互相依赖的状态和记录不能留下半成功，需要明确回滚或补偿策略。', `复习${c.domain}的成功、失败和回滚用例。`, '实战'),
+        c => makeGeneratedQuestion('REST 接口', `如果接口只需要读取${c.key}，更符合语义的 HTTP 方法通常是？`, ['GET', 'POST', 'DELETE', 'PATCH'], 0, '接口方法应表达操作语义，读取和修改不能混为一谈。', `为${c.domain}写一份正常和异常接口清单。`, '基础'),
+        c => makeGeneratedQuestion('状态流转', `${c.domain}中的${c.failure}发生时，哪种实现更可靠？`, ['先确认当前状态和权限，再执行允许的状态变化', '直接把状态改成成功', '删除历史记录', '让前端决定数据库状态'], 0, '业务状态变化要受规则约束，并保留可追溯的过程。', `画出${c.domain}的状态图并补充非法跳转。`, '实战'),
+        c => makeGeneratedQuestion('测试设计', `为了验证${c.rule}，哪组测试最有价值？`, ['正常样例、边界样例、重复操作和失败恢复', '只测一条正常数据', '只看页面颜色', '只测试启动命令'], 0, '企业代码要证明关键规则和异常行为，而不是只证明能启动。', `为${c.domain}写四条验收用例。`, '进阶'),
+        c => makeGeneratedQuestion('日志排错', `${c.domain}出现${c.failure}，日志至少应帮助你确认什么？`, ['时间、业务标识、关键动作、失败原因和下一步线索', '只打印一句“出错了”', '把密码全部打印出来', '删除旧日志'], 0, '日志要可检索且避免泄露敏感信息，才能支持定位和复盘。', `为${c.domain}设计一条安全的错误日志。`, '进阶'),
+        c => makeGeneratedQuestion('配置管理', `${c.domain}需要在不同电脑或环境运行，哪种方式更合适？`, ['把环境差异放进配置示例并说明默认值', '把个人绝对路径写死', '把密钥提交到仓库', '要求每个人手改源码'], 0, '配置和代码分离能降低环境差异，也避免泄露密钥。', `整理${c.domain}的配置示例和启动命令。`, '基础'),
+        c => makeGeneratedQuestion('Git 习惯', `完成${c.task}后，哪种提交方式最有助于团队回看？`, ['小步提交并写清行为变化和验证方式', '所有修改攒到一个未知大提交', '只提交截图', '删除历史提交'], 0, '提交信息应帮助别人理解改了什么、为什么改以及如何验证。', `写一条${c.domain}功能提交信息和验证记录。`, '基础'),
+        c => makeGeneratedQuestion('查询与索引', `如果${c.domain}经常按${c.key}筛选，如何决定是否加索引？`, ['结合查询频率、选择性、执行计划和写入成本验证', '所有字段都加索引', '任何查询都不需要索引', '把全表复制到内存'], 0, '索引是数据和查询的共同决策，不是越多越好。', `为${c.domain}写一条查询并说明索引理由。`, '实战'),
+        c => makeGeneratedQuestion('交付文档', `${c.domain}交付给同事时，哪些材料最关键？`, ['运行说明、初始化方式、接口或输入输出、测试记录和已知限制', '只有结果截图', '只给仓库链接不说明环境', '只说“安装最新版”'], 0, '可复现的说明和证据是工作交付的一部分。', `为${c.domain}写一页 README 骨架。`, '实战')
+      ],
+      python: [
+        c => makeGeneratedQuestion('数据结构', `${c.domain}要${c.task}，且要求${c.rule}。哪种结构更容易让代码表达业务？`, ['用字典或集合建立稳定映射和唯一集合', '把所有记录拼成一个字符串', '大量嵌套 if', '只保留最后一条记录'], 0, '数据结构应该表达任务关系，减少隐式规则和重复遍历。', `用 Python 为${c.domain}写一个小型数据映射。`, '基础'),
+        c => makeGeneratedQuestion('文件路径', `脚本处理${c.file}时怎样避免只能在作者电脑运行？`, ['使用 pathlib、参数或配置，并说明输入输出目录', '写死个人桌面绝对路径', '让用户修改源码', '把文件复制到系统目录'], 0, '路径是运行配置，不应绑定个人电脑。', `为${c.file}补充命令行参数和运行说明。`, '基础'),
+        c => makeGeneratedQuestion('数据校验', `处理${c.file}时发现${c.bad}，更可靠的做法是？`, ['记录文件、行号、原值和原因，再按规则处理', '悄悄改成一个看起来正常的值', '删除整个文件', '直接忽略并宣称成功'], 0, '数据错误需要可定位、可解释、可复核。', `为${c.domain}生成错误行清单样例。`, '进阶'),
+        c => makeGeneratedQuestion('缺失值', `${c.domain}中出现字段缺失，应该先确认什么？`, ['字段是否必填、默认值是什么以及是否需要进入错误清单', '所有缺失都填 0', '所有缺失都删行', '随机填充'], 0, '缺失值的处理是业务规则，不应由脚本作者随意猜测。', `为${c.domain}写三种缺失值处理规则。`, '进阶'),
+        c => makeGeneratedQuestion('异常处理', `读取${c.file}时遇到${c.bad}，哪种方式更利于批处理继续？`, ['只捕获可预期错误并记录上下文，其他错误继续暴露', 'except 后全部 pass', '把错误行伪造成成功', '无限重试同一错误'], 0, '批处理需要区分可恢复输入错误和程序错误。', `练习${c.domain}的错误分类和恢复。`, '进阶'),
+        c => makeGeneratedQuestion('编码与格式', `为了让${c.file}在不同环境读取稳定，应该明确？`, ['编码、分隔符、表头、换行和日期金额格式', '只看文件后缀', '把乱码删除', '要求用户猜编码'], 0, '可复现的数据处理需要明确格式，而不是依赖电脑默认设置。', `整理${c.file}的字段字典。`, '基础'),
+        c => makeGeneratedQuestion('接口响应', `${c.domain}调用外部接口时，处理响应的顺序更适合是？`, ['先检查状态和结构，再解析字段并保存失败上下文', '无论状态都直接当成功', '只解析第一行', '删除响应状态'], 0, '状态、结构和业务字段分别代表不同层次的正确性。', `给${c.domain}设计正常、空结果和错误响应。`, '进阶'),
+        c => makeGeneratedQuestion('有限重试', `如果${c.domain}遇到短暂${c.bad}，怎样重试更安全？`, ['设置超时、有限次数、间隔或退避，并记录最终失败', '无限高速重试', '把失败伪装成空数据', '每次失败都重新跑全部数据'], 0, '重试必须有边界，避免卡死、重复请求和结果不可追查。', `为${c.domain}写一张重试策略表。`, '实战'),
+        c => makeGeneratedQuestion('幂等处理', `${c.domain}脚本重复运行时，如何避免${c.rule}被破坏？`, ['定义稳定键，明确覆盖、跳过或追加规则', '每次随机生成新 ID', '删除旧结果', '不保存任何状态'], 0, '幂等性来自稳定标识和清晰的重复处理规则。', `为${c.domain}设计一次重复运行验收。`, '实战'),
+        c => makeGeneratedQuestion('统计口径', `生成${c.output}前，哪项信息最应该先确认？`, ['字段含义、时间范围、单位、去重和边界规则', '先选图表颜色', '直接复制网上公式', '只看数据量'], 0, '报表正确性首先取决于业务口径，而不是库或图表。', `为${c.domain}写一张统计口径卡。`, '进阶'),
+        c => makeGeneratedQuestion('测试数据', `要验证${c.domain}不会把错误数据静默放过，测试集至少应包含？`, ['正常、缺失、重复、格式错误和重复运行样例', '只有一条正常样例', '只有超大文件', '只检查程序退出'], 0, '数据工具的风险集中在边界和重复操作，测试要覆盖这些情况。', `为${c.domain}准备小样本调试集。`, '实战'),
+        c => makeGeneratedQuestion('配置与依赖', `把${c.domain}交给同学运行时，怎样减少环境猜测？`, ['锁定 Python 版本范围、依赖、参数和输入输出约定', '让对方自行安装所有最新版', '把依赖复制到代码里', '只发一张截图'], 0, '可复现环境和清晰参数是自动化脚本能被复用的前提。', `为${c.domain}写运行前检查清单。`, '基础'),
+        c => makeGeneratedQuestion('结果交付', `${c.domain}输出${c.output}后，怎样让别人相信结果可追溯？`, ['保存输入版本、处理时间、规则版本和失败记录', '只保留最终数字', '删除原始数据', '不写任何说明'], 0, '数据结果需要知道从哪来、按什么规则处理以及哪里失败过。', `为${c.domain}补充一次结果复盘。`, '实战')
+      ],
+      crawler: [
+        c => makeGeneratedQuestion('来源边界', `${c.domain}使用${c.source}时，开始技术实现前最重要的是？`, ['确认授权、访问范围、字段用途和保存边界', '直接提高并发', '绕过访问控制', '隐藏来源'], 0, '来源和用途决定能不能采、采什么、保存多久，技术不能替代授权。', `为${c.domain}写来源登记卡。`, '基础'),
+        c => makeGeneratedQuestion('请求节奏', `采集${c.record}时，为什么要设置请求间隔或限速？`, ['控制访问节奏，减少对来源服务的压力', '让字段自动正确', '保证永远不超时', '替代数据校验'], 0, '限速是稳定性和访问边界的一部分，不等于保证成功。', `为${c.domain}设计请求间隔和失败记录。`, '基础'),
+        c => makeGeneratedQuestion('分页停止', `${c.domain}采集${c.record}时，哪个更适合作为停止信号？`, ['根据接口或页面规则确认空页、末页或 next 游标结束', '无限增加页码', '请求到 999 页再停', '随机停止'], 0, '停止条件必须来自已确认的数据规则，避免漏采或无限请求。', `为${c.domain}画分页流程。`, '进阶'),
+        c => makeGeneratedQuestion('解析缺失', `解析${c.domain}时遇到字段缺失，最好的处理是？`, ['按字段规则记录缺失并决定继续、跳过或失败', '用上一条记录冒充', '随机生成字段', '删除来源信息'], 0, '解析器要能面对页面变化，不能编造数据。', `为${c.domain}写字段字典和缺失规则。`, '进阶'),
+        c => makeGeneratedQuestion('唯一键', `${c.domain}要避免重复${c.record}，应该先定义什么？`, ['稳定的业务唯一键或组合键', '浏览器窗口标题', '随机数', '请求次数'], 0, '去重必须依赖稳定标识，不能依赖运行顺序或随机状态。', `为${c.domain}选择唯一键并举出冲突样例。`, '基础'),
+        c => makeGeneratedQuestion('增量采集', `${c.domain}要识别新增和更新，优先需要保存什么？`, ['稳定 ID、来源时间或内容摘要以及上次游标', '只保存最后一条文本', '每次删除历史结果', '只保存页面截图'], 0, '增量处理依赖可比较的状态，才能减少重复并发现更新。', `为${c.domain}设计第一次和第二次采集的差异。`, '实战'),
+        c => makeGeneratedQuestion('失败重试', `${c.domain}遇到${c.failure}时，哪种处理更稳妥？`, ['设置超时、有限重试、间隔或退避，并把失败任务留档', '高速无限重试', '把失败标成成功', '删除已经成功的结果'], 0, '失败处理要有边界和补采入口，不能让任务卡死或制造压力。', `为${c.domain}设计失败队列。`, '实战'),
+        c => makeGeneratedQuestion('静态动态判断', `${c.domain}的数据已经能从 HTML 或 JSON 获取，是否需要马上使用浏览器自动化？`, ['不需要，先使用更轻量的请求和解析方案', '必须使用浏览器', '直接增加并发', '复制完整框架'], 0, '工具选择应该由实际交互和渲染需求驱动，避免无谓复杂度。', `比较${c.domain}的静态方案和动态方案。`, '基础'),
+        c => makeGeneratedQuestion('来源可追溯', `保存${c.record}时，哪些字段最有助于后续复核？`, ['来源 URL、采集时间、请求版本和原始标识', '只保存最终标题', '隐藏采集日期', '只记录运行电脑名'], 0, '来源、时间和版本让结果可以回溯和解释。', `为${c.domain}补充一份数据包登记信息。`, '进阶'),
+        c => makeGeneratedQuestion('数据分层', `${c.domain}采集后，为什么可以区分原始、清洗和结果数据？`, ['方便重放、排查解析问题和核对业务结果', '让文件数量看起来更多', '避免任何测试', '替代来源登记'], 0, '数据分层能保留证据和转换过程，但仍要遵守保存边界。', `为${c.domain}画原始到结果的数据流。`, '实战'),
+        c => makeGeneratedQuestion('质量检查', `${c.domain}出现${c.failure}后，最应该产生什么？`, ['包含数量、缺失、重复和失败原因的质量报告', '静默放过并写成功', '只打印一个数字', '删除异常记录'], 0, '采集结果的可信度要通过可审计的质量检查来说明。', `为${c.domain}写一份采集结果验收表。`, '进阶'),
+        c => makeGeneratedQuestion('合规数据', `关于${c.domain}，哪项原则更适合学习项目？`, ['使用授权来源或模拟数据，避免采集个人敏感资料', '默认所有公开页面都可以无限采集', '尝试绕过验证码', '删除来源与用途记录'], 0, '公开可见不等于无限使用，训练项目应明确来源、用途和数据边界。', `复习来源授权、脱敏和保存周期。`, '基础'),
+        c => makeGeneratedQuestion('日志指标', `为了判断${c.domain}是否完整运行，日志至少应记录？`, ['成功页数、失败页数、重试次数、结果数量和耗时', '只记录开始时间', '只输出网页正文', '完全关闭日志'], 0, '日志要能帮助判断是否漏页、重复、失败或性能异常。', `为${c.domain}设计运行摘要。`, '进阶')
+      ]
+    };
+    Object.keys(generatedFamilies).forEach(key => generatedFamilies[key].forEach((family, familyIndex) => generatedContexts[key].forEach((context, contextIndex) => { const item = family(context, contextIndex + familyIndex); quizData[key].questions.push({ ...item, id: `${key}-${familyIndex}-${contextIndex}` }); })));
     const saveState = () => localStorage.setItem(stateKey, JSON.stringify(state));
     const toast = (message) => { const el = document.getElementById('toast'); el.textContent = message; el.classList.add('show'); clearTimeout(window.toastTimer); window.toastTimer = setTimeout(() => el.classList.remove('show'), 2600); };
     const switchView = (name) => {
@@ -624,6 +735,10 @@
       document.getElementById('trackDescription').textContent = track.description;
       document.getElementById('trackCount').textContent = track.count;
       document.querySelectorAll('[data-track]').forEach(button => button.classList.toggle('active', button.dataset.track === state.track));
+      let topicCloud = document.getElementById('trackTopics');
+      if (!topicCloud) { topicCloud = document.createElement('div'); topicCloud.id = 'trackTopics'; document.getElementById('roadmapContinue').before(topicCloud); }
+      topicCloud.className = 'topic-cloud';
+      topicCloud.innerHTML = `<strong>本路线覆盖的企业技能</strong><div class="topic-tags">${(topicMap[state.track] || []).map(topic => `<span class="topic-tag">${topic}</span>`).join('')}</div>`;
       document.getElementById('unitList').innerHTML = track.units.map((item, index) => {
         const isCurrent = index === 0 && state.track === 'java';
         const status = isCurrent ? (state.taskCompleted ? '已完成' : '继续') : item[3];
