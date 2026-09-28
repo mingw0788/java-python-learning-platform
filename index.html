@@ -628,7 +628,22 @@
         { domain: '资产盘点', key: '资产标签', task: '导入盘点结果', rule: '缺失标签必须进入错误清单', result: '盘点报告', failure: '脏数据导入' },
         { domain: '校园缴费', key: '缴费单号', task: '处理支付回调', rule: '同一回调重复到达不能重复记账', result: '支付状态', failure: '重复回调' },
         { domain: '通知中心', key: '消息 ID', task: '发送未读通知', rule: '已读消息不能再次计入未读', result: '未读数量', failure: '状态不一致' },
-        { domain: '招聘投递', key: '候选人和岗位', task: '保存投递记录', rule: '同一岗位不能重复投递', result: '投递结果', failure: '重复投递' }
+        { domain: '招聘投递', key: '候选人和岗位', task: '保存投递记录', rule: '同一岗位不能重复投递', result: '投递结果', failure: '重复投递' },
+        { domain: '宿舍维修', key: '房间和工单', task: '合并重复报修', rule: '同一问题不能生成多个处理中工单', result: '维修队列', failure: '重复工单' },
+        { domain: '快递代收', key: '取件码', task: '确认取件', rule: '已取件包裹不能再次确认', result: '取件记录', failure: '重复取件' },
+        { domain: '食堂订单', key: '订单和窗口', task: '生成取餐队列', rule: '已取消订单不能进入队列', result: '队列状态', failure: '取消后仍出餐' },
+        { domain: '实验数据服务', key: '实验批次', task: '保存测量结果', rule: '同一批次需要保留版本', result: '版本记录', failure: '覆盖历史数据' },
+        { domain: '志愿服务', key: '活动和学生', task: '核算服务时长', rule: '签到签退必须成对', result: '时长明细', failure: '缺少签退' },
+        { domain: '班级通讯录', key: '学生学号', task: '导入联系方式', rule: '敏感字段只允许授权角色查看', result: '导入报告', failure: '越权读取' },
+        { domain: '机房排课', key: '课程和机房', task: '安排上机课程', rule: '容量和时间必须同时满足', result: '排课结果', failure: '容量不足' },
+        { domain: '校园卡服务', key: '卡号和流水号', task: '处理充值记录', rule: '流水号必须幂等', result: '余额变更', failure: '重复充值' },
+        { domain: '科研项目', key: '项目编号', task: '更新项目进度', rule: '只能由项目成员提交', result: '进度时间线', failure: '非成员操作' },
+        { domain: '维修备件', key: '备件编码', task: '领用备件', rule: '领用数量不能超过可用库存', result: '领用流水', failure: '库存不足' },
+        { domain: '校车预约', key: '乘车人和班次', task: '锁定座位', rule: '同一乘车人不能占用多个座位', result: '座位结果', failure: '重复锁座' },
+        { domain: '考试安排', key: '课程和考场', task: '生成考试安排', rule: '同一学生不能同时参加两场考试', result: '安排清单', failure: '时间冲突' },
+        { domain: '知识库', key: '文章 ID', task: '发布技术文章', rule: '草稿和已发布版本分离', result: '发布记录', failure: '误覆盖草稿' },
+        { domain: '实习打卡', key: '学生和日期', task: '生成出勤汇总', rule: '补卡记录需要审批状态', result: '出勤报表', failure: '未审批补卡' },
+        { domain: '课程评价', key: '课程和学生', task: '汇总匿名评价', rule: '未提交评价不能计入平均分', result: '评价摘要', failure: '重复评价' }
       ],
       python: [
         { domain: '成绩表清洗', file: 'scores.csv', task: '合并多份成绩表', rule: '学号唯一', output: '错误行清单', bad: '缺失列' },
@@ -645,7 +660,22 @@
         { domain: '日志分析', file: 'app.log', task: '统计错误类型', rule: '时间范围固定', output: '分析摘要', bad: '日志行不完整' },
         { domain: '图片素材', file: 'assets/', task: '批量改名和归档', rule: '原文件不能无记录删除', output: '操作清单', bad: '目标文件已存在' },
         { domain: '活动报名', file: 'registrations.csv', task: '筛选有效报名', rule: '手机号格式需校验', output: '有效名单', bad: '重复手机号' },
-        { domain: '设备巡检', file: 'inspection.json', task: '生成逾期清单', rule: '统计时刻固定', output: '逾期报表', bad: '时区不明' }
+        { domain: '设备巡检', file: 'inspection.json', task: '生成逾期清单', rule: '统计时刻固定', output: '逾期报表', bad: '时区不明' },
+        { domain: '宿舍报修', file: 'repairs.csv', task: '统计处理时长', rule: '开始和结束时间可解释', output: '工单报表', bad: '时间字段为空' },
+        { domain: '快递代收', file: 'packages.json', task: '生成未取件清单', rule: '取件码唯一', output: '提醒名单', bad: '取件码重复' },
+        { domain: '食堂订单', file: 'canteen-orders.csv', task: '按窗口汇总订单', rule: '取消订单不计入收入', output: '窗口报表', bad: '状态值未知' },
+        { domain: '实验测量', file: 'measurements.parquet', task: '计算批次均值', rule: '异常值处理规则明确', output: '实验摘要', bad: '单位不一致' },
+        { domain: '志愿服务', file: 'volunteer-checkin.csv', task: '核算服务时长', rule: '签到签退必须成对', output: '时长明细', bad: '缺少签退' },
+        { domain: '通讯录脱敏', file: 'contacts.xlsx', task: '生成教学样例', rule: '敏感字段脱敏', output: '脱敏文件', bad: '原始字段混入' },
+        { domain: '机房排课', file: 'classrooms.json', task: '检查排课冲突', rule: '时间和容量同时满足', output: '冲突清单', bad: '时间格式混乱' },
+        { domain: '校园卡流水', file: 'card-transactions.csv', task: '检查重复流水', rule: '流水号唯一', output: '异常报告', bad: '流水号缺失' },
+        { domain: '科研进度', file: 'research-progress.json', task: '生成延期项目', rule: '截止日期口径固定', output: '延期清单', bad: '日期时区不明' },
+        { domain: '备件领用', file: 'spare-parts.csv', task: '比较领用和库存', rule: '编码作为稳定键', output: '差异清单', bad: '数量为负' },
+        { domain: '校车预约', file: 'bus-bookings.json', task: '统计座位利用率', rule: '取消预约不能计入已乘车', output: '班次报表', bad: '状态缺失' },
+        { domain: '考试安排', file: 'exam-schedule.csv', task: '识别学生时间冲突', rule: '学生和时间作为组合键', output: '冲突清单', bad: '课程名不一致' },
+        { domain: '知识库文章', file: 'articles.json', task: '生成发布清单', rule: '只统计已发布版本', output: '发布摘要', bad: '版本号缺失' },
+        { domain: '实习打卡', file: 'intern-attendance.csv', task: '统计出勤率', rule: '补卡审批状态明确', output: '出勤报表', bad: '审批字段缺失' },
+        { domain: '课程评价', file: 'course-feedback.csv', task: '汇总匿名评价', rule: '未提交评价不计入平均分', output: '评价摘要', bad: '匿名标识冲突' }
       ],
       crawler: [
         { domain: '练习站分页列表', source: '授权练习站', record: '条目 ID', task: '采集全部分页', rule: '空页后停止', failure: '页码重复' },
@@ -662,7 +692,22 @@
         { domain: '政策公开目录', source: '授权公开目录', record: '文号', task: '保存政策摘要', rule: '原文链接可追溯', failure: '摘要为空' },
         { domain: '图片元数据练习', source: '本地练习资源', record: '文件名', task: '读取元数据', rule: '不上传文件', failure: '文件损坏' },
         { domain: 'API 版本练习', source: '本地模拟 API', record: '资源 ID', task: '兼容两种响应', rule: '记录接口版本', failure: '字段改名' },
-        { domain: '数据质量练习', source: '授权样例数据', record: '组合唯一键', task: '检查重复缺失', rule: '输出质量报告', failure: '字段类型变化' }
+        { domain: '数据质量练习', source: '授权样例数据', record: '组合唯一键', task: '检查重复缺失', rule: '输出质量报告', failure: '字段类型变化' },
+        { domain: '宿舍公告练习', source: '模拟公开源', record: '公告 ID', task: '采集最新公告', rule: '保留发布时间', failure: '发布时间缺失' },
+        { domain: '快递状态练习', source: '本地模拟 API', record: '包裹 ID', task: '获取状态变化', rule: '只保存允许字段', failure: '接口限流' },
+        { domain: '食堂菜单练习', source: '授权样例页面', record: '菜品 ID', task: '解析每日菜单', rule: '菜单日期可追溯', failure: '价格为空' },
+        { domain: '实验数据练习', source: '自建模拟接口', record: '批次 ID', task: '增量获取实验结果', rule: '记录最后更新时间', failure: '分页游标失效' },
+        { domain: '志愿活动练习', source: '公开模拟目录', record: '活动 ID', task: '保存活动名额', rule: '不采集个人信息', failure: '名额字段缺失' },
+        { domain: '机房资源练习', source: '本地练习页面', record: '机房 ID', task: '提取可预约时段', rule: '保留页面来源', failure: 'HTML 结构变化' },
+        { domain: '校园卡接口练习', source: '授权 API', record: '流水号', task: '按时间段获取流水', rule: '请求时间可审计', failure: '返回 401' },
+        { domain: '科研项目练习', source: '授权公开目录', record: '项目编号', task: '获取项目状态', rule: '状态变化保留历史', failure: '字段重命名' },
+        { domain: '备件目录练习', source: '自建模拟页面', record: '备件编码', task: '采集库存变化', rule: '保存采集批次', failure: '数量格式错误' },
+        { domain: '校车班次练习', source: '模拟公开源', record: '班次 ID', task: '获取班次余座', rule: '空班次也要记录', failure: '响应超时' },
+        { domain: '考试安排练习', source: '授权样例数据', record: '考试 ID', task: '解析考试时间', rule: '统一时区', failure: '日期格式变化' },
+        { domain: '知识库练习', source: '本地模拟 API', record: '文章 ID', task: '采集已发布文章', rule: '草稿不能进入结果', failure: '权限响应' },
+        { domain: '实习岗位练习', source: '模拟练习站', record: '岗位 ID', task: '提取技能要求', rule: '不采集联系方式', failure: '技能标签为空' },
+        { domain: '学习资源练习', source: '授权公开目录', record: '资源链接', task: '检查链接可用性', rule: '保存检查时间', failure: '重定向过多' },
+        { domain: '课程资料练习', source: '授权公开目录', record: '资料 ID', task: '保存课程资料元数据', rule: '来源链接可追溯', failure: '下载响应异常' }
       ]
     };
     const generatedFamilies = {
