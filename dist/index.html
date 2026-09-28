@@ -304,6 +304,7 @@
     .unit-row.locked { opacity: .7; }
     .unit-info { min-width: 0; }
     .unit-meta { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 7px; }
+    .unit-content { color: #53647a; font-size: 11px; line-height: 1.45; margin-top: 6px; }
     .phase-chip { font-size: 11px; border-radius: 99px; padding: 3px 7px; background: #f0f3f6; color: var(--muted); }
     .phase-chip.learn { background: var(--blue-soft); color: var(--blue); }
     .phase-chip.practice { background: var(--orange-soft); color: #be5b2c; }
@@ -474,7 +475,7 @@
   <div class="toast" id="toast" role="status"></div>
   <script>
     const stateKey = 'learning-space-state-v1';
-    const defaultState = { selectedMinutes: 15, progress: 3, reproduced: 0, practice: 0, problem: null, notes: [], taskStarted: false, taskCompleted: false, track: 'java', quizScores: {} };
+    const defaultState = { selectedMinutes: 15, progress: 3, reproduced: 0, practice: 0, problem: null, notes: [], taskStarted: false, taskCompleted: false, track: 'java', quizScores: {}, quizWrong: {} };
     let state = { ...defaultState, ...JSON.parse(localStorage.getItem(stateKey) || '{}') };
     const trackData = {
       java: {
@@ -535,6 +536,72 @@
         { text: '静态 HTML 已经能拿到所需字段，是否应该直接上 Playwright？', options: ['应该，工具越复杂越专业', '不必，先用更轻量的 HTTP + 解析方案', '改用无限多线程', '复制别人完整框架'], answer: 1, why: '浏览器自动化有更高成本；只有页面交互或 JS 渲染确实需要时再引入。', next: '复习静态与动态页面判断。' }
       ]}
     };
+    const unitExtras = {
+      java: [
+        ['知识：路径、终端、JDK、Git', '产出：Hello 程序 + 运行记录'],
+        ['知识：变量、分支、循环、集合', '产出：设备查询小程序'],
+        ['知识：对象职责、文件、异常、日志', '产出：台账导入错误清单'],
+        ['知识：主键、唯一约束、JOIN、事务', '产出：建库脚本 + 回滚记录'],
+        ['知识：REST、JSON、校验、分层', '产出：接口说明 + 异常响应'],
+        ['知识：权限、状态、幂等、测试', '产出：借用规则测试表'],
+        ['知识：打包、配置、回归、交付', '产出：运行手册 + 需求变更']
+      ],
+      python: [
+        ['知识：解释器、路径、虚拟环境', '产出：可重复运行的脚本'],
+        ['知识：列表、字典、函数、流程控制', '产出：批处理函数'],
+        ['知识：CSV、JSON、编码、校验', '产出：错误行清单'],
+        ['知识：字段映射、缺失、重复、日期', '产出：多表清洗工具'],
+        ['知识：HTTP、超时、重试、分页', '产出：接口原始数据包'],
+        ['知识：统计口径、报表、配置、交付', '产出：可重复生成周报']
+      ],
+      crawler: [
+        ['知识：请求、状态码、授权来源', '产出：来源登记卡'],
+        ['知识：HTML / JSON 解析、字段字典', '产出：结构化记录'],
+        ['知识：分页、限速、超时、重试', '产出：失败页清单'],
+        ['知识：唯一键、去重、增量、断点', '产出：可重复运行数据'],
+        ['知识：静态 / 动态判断、Playwright', '产出：采集方式决策记录'],
+        ['知识：日志、来源、数据字典、核对', '产出：采集项目交付包']
+      ]
+    };
+    const questionBankAdditions = {
+      java: [
+        { text: '需要根据设备编号快速找到设备对象，且编号是唯一键。更贴合这个需求的结构是？', options: ['HashMap<编号, 设备>', '只用 List 顺序查找', '把对象序列化成一段文本', '为每个编号写一个 if'], answer: 0, why: 'Map 表达键到值的映射，适合按唯一编号定位对象。', next: '复习 Map、键的唯一性和索引思维。' },
+        { text: '读取文件时，怎样更容易保证文件句柄在异常后也能关闭？', options: ['把 close 写在注释里', '使用 try-with-resources', '永远不捕获异常', '把文件内容放进全局变量'], answer: 1, why: 'try-with-resources 会在离开作用域时自动关闭实现 AutoCloseable 的资源。', next: '复习文件读写、资源释放和异常边界。' },
+        { text: '两个内容相同的 String 变量比较内容是否相等，通常应该优先使用？', options: ['==', '.equals()', '随机数比较', '比较对象地址字符串'], answer: 1, why: '== 比较引用是否相同；字符串内容比较应使用 equals，并注意 null 场景。', next: '复习对象引用、equals 和 null 防护。' },
+        { text: '设备编号字段应该由类外部随意修改，还是通过方法维护规则？', options: ['声明为 private，通过方法集中维护', '设为 public 让任何地方修改', '复制三份字段', '不保存编号'], answer: 0, why: '封装让校验和状态变化有一个明确入口，减少业务规则散落。', next: '复习对象职责、封装和可维护性。' },
+        { text: '设备导入工具至少应覆盖哪个边界样例？', options: ['只有 1 条正常记录', '只测最大文件', '空文件、重复编号、缺失必填字段', '只看菜单是否漂亮'], answer: 2, why: '真实输入经常包含空、重复和缺失字段，边界样例比只测顺利路径更能发现问题。', next: '为导入工具补一组正常与异常测试数据。' },
+        { text: '只读取设备列表、不改变服务器状态的接口，更符合哪种 HTTP 方法？', options: ['GET', 'POST', 'DELETE', 'PATCH'], answer: 0, why: 'GET 表达读取资源；方法选择应和操作语义一致。', next: '复习 HTTP 方法、状态码和接口说明。' },
+        { text: '经常按 device_no 查询设备，数据库层面更值得考虑什么？', options: ['把字段改成超长文本', '为查询条件建立合适索引并用数据验证收益', '删除主键', '每次导出全表到代码中查'], answer: 1, why: '索引服务于实际查询条件，但要结合选择性、写入成本和执行计划验证。', next: '进入 SQL 查询、约束与索引单元。' },
+        { text: '生产排查中，为什么不建议只用 System.out.println 到处打印？', options: ['它不能输出任何内容', '日志缺少级别、上下文和统一管理', '它会自动写入数据库', '它只能在 Linux 使用'], answer: 1, why: '日志需要时间、级别、请求或业务上下文，便于筛选和定位，不能只靠散落打印。', next: '复习日志级别、异常上下文和问题复盘。' },
+        { text: '一个方法同时负责读 CSV、校验、保存数据库和打印菜单，最先应关注什么？', options: ['方法名再缩短', '职责过多，拆出可测试的步骤', '增加更多全局变量', '把异常全部吞掉'], answer: 1, why: '职责过多会让修改和测试困难，应按输入、校验、业务和持久化边界拆分。', next: '复习分层、单一职责和可测试设计。' },
+        { text: '一个接口返回 500，但日志没有请求参数、业务编号和异常原因，下一步最有价值的是？', options: ['直接重启服务器', '补齐安全范围内的上下文并复现最小场景', '删除接口', '让用户重复点击'], answer: 1, why: '排错需要可复现条件和足够上下文，先缩小问题范围再修改代码。', next: '做一次日志排错与最小复现练习。' }
+      ],
+      python: [
+        { text: '判断一批订单编号是否已经处理过，哪种结构更直接？', options: ['set', '嵌套字符串拼接', '无限增长的 if', '只保存最后一条'], answer: 0, why: 'set 适合表达唯一集合，能帮助去重并快速判断是否见过。', next: '复习集合、去重和幂等输出。' },
+        { text: '读取中文 CSV 并保证在不同电脑上尽量一致，优先明确什么？', options: ['随机编码', '文件编码、换行和字段格式', '只改文件名', '删除中文列'], answer: 1, why: '编码和字段格式是跨环境运行的基础，不能把乱码当成业务数据问题。', next: '做一次 UTF-8、缺失列和异常行练习。' },
+        { text: '捕获异常时，哪种范围更容易定位问题？', options: ['只包住可能失败的那一小段代码', '把整个程序都包在一个 except 里', '直接 except: pass', '不记录异常'], answer: 0, why: '窄范围捕获能保留上下文，避免把真正的程序错误静默吞掉。', next: '复习异常分类、错误清单和日志。' },
+        { text: '某一行日期格式非法，清洗程序更适合怎么处理？', options: ['悄悄替换成今天', '记录行号、原值和原因，并按规则决定是否跳过', '删除整份文件', '让日期变成空字符串后不说明'], answer: 1, why: '数据清洗要可追溯，错误行需要保留原因，便于业务修复和复核。', next: '练习日期、金额格式和错误记录导出。' },
+        { text: '只是处理小型 CSV，不需要复杂数据框架时，先选择什么更合适？', options: ['先上分布式集群', '用标准库 csv 和清晰的函数完成任务', '把文件全复制进日志', '改写数据库内核'], answer: 1, why: '工具应服务于任务；先用足够简单、可复现的方案，再按规模和需求升级。', next: '比较标准库 csv 与表格工具的适用边界。' },
+        { text: '脚本在自己的电脑能运行，换电脑就找不到输入文件，常见改进是？', options: ['把绝对路径写死', '使用配置或命令行参数，并说明输入目录', '让用户修改源码', '把文件名改成 a.txt'], answer: 1, why: '路径是运行配置，不应绑定个人电脑；参数和说明让工具更可复用。', next: '复习 pathlib、配置与命令行参数。' },
+        { text: 'JSON 中某个可选字段缺失，程序应如何避免无意义崩溃？', options: ['先按业务规则给默认值或记录缺失', '直接假定永远存在', '删除整份 JSON', '把所有字段转换成密码'], answer: 0, why: '可选字段要有明确规则：默认、跳过或报错都可以，但不能靠猜。', next: '练习 JSON 字段字典和缺失数据规则。' },
+        { text: '调用接口后，为什么不应直接 response.json() 而不看状态？', options: ['状态码能说明请求结果，需先按规则处理失败', '因为 JSON 永远不能读取', '因为必须改用网页浏览器', '因为状态码和业务无关'], answer: 0, why: 'HTTP 状态、响应结构和业务错误可能分别表示不同问题，先检查再解析更稳妥。', next: '复习 HTTP 状态码、超时和响应校验。' },
+        { text: '数据报表中同时有“订单金额”和“退款金额”，净销售额口径应该怎么确定？', options: ['代码作者自行猜测', '先和需求确认字段含义、时间口径和计算规则', '只取较大的数字', '把退款行删除'], answer: 1, why: '统计口径是业务规则，必须先澄清再实现，否则漂亮报表也可能是错的。', next: '写一张报表字段字典和验收样例。' },
+        { text: '为了确认清洗工具没有把重复订单写两次，最有价值的测试是？', options: ['只测 1 行正常数据', '准备重复、缺失、错误格式和重复运行场景', '只检查程序退出码', '只看运行速度'], answer: 1, why: '数据工具要验证异常和幂等，重复运行与脏数据是关键风险。', next: '完成 Python 数据工具的回归测试表。' }
+      ],
+      crawler: [
+        { text: '采集任务的请求间隔主要解决什么问题？', options: ['控制访问节奏，降低对来源服务的压力', '让 HTML 自动变漂亮', '保证所有请求一定成功', '替代去重逻辑'], answer: 0, why: '限速是访问边界和稳定性的基础，不等于绕过限制，也不能保证成功。', next: '复习请求间隔、超时和失败记录。' },
+        { text: '解析页面时某个节点不存在，最好的处理不是？', options: ['按业务规则记录缺失并继续或失败', '直接取值让程序崩溃且不说明', '用上一页数据冒充', '随机生成一个字段'], answer: 0, why: '页面结构可能变化，缺失字段需要可解释处理，不能编造数据。', next: '练习字段字典、缺失节点和来源核对。' },
+        { text: '采集结果带有 source_url 和 fetched_at 的主要价值是？', options: ['让结果可追溯、可复核', '让文件变得更大', '替代业务唯一键', '提高网络速度'], answer: 0, why: '来源和采集时间让数据使用者知道记录从哪里来、何时取得。', next: '补充数据包登记和来源字段。' },
+        { text: '增量采集最需要稳定识别什么？', options: ['浏览器窗口位置', '记录的唯一标识或更新时间边界', '日志颜色', '电脑用户名'], answer: 1, why: '增量依赖稳定 ID 或可信时间边界，避免重复抓取或漏掉更新。', next: '复习唯一键、游标和断点续采。' },
+        { text: '面对公开页面上的个人联系方式，课程项目应如何处理？', options: ['批量收集并公开', '不把个人资料采集作为训练目标，使用授权或模拟数据', '删除来源说明', '尝试绕过访问控制'], answer: 1, why: '学习采集技术不等于获得任意个人数据的授权，训练应使用合规来源和模拟数据。', next: '复习采集边界和数据脱敏。' },
+        { text: '什么时候才有理由引入 Playwright 这类浏览器自动化？', options: ['静态请求已经满足需求时', '页面交互或 JS 渲染是静态方案无法完成的必要条件时', '任何页面都必须使用', '为了让代码更长'], answer: 1, why: '浏览器自动化成本更高，应由实际交互和渲染需求驱动。', next: '比较 HTTPX、解析器和 Playwright 的边界。' },
+        { text: '采集分页时，如何避免下一页参数失效导致重复抓取？', options: ['记录请求参数、响应页码和已见唯一键', '不保存任何日志', '只按页面顺序猜测', '无限增加页码'], answer: 0, why: '分页任务需要把请求参数、结果和唯一键联系起来，才能发现重复和跳页。', next: '做一次分页审计日志练习。' },
+        { text: '如果来源返回 429，最不应该做的是？', options: ['记录状态并按规则暂停或有限退避', '继续高速并发重试', '检查访问策略和请求频率', '把该页标记为待补采'], answer: 1, why: '高速重试会加重压力，也可能违反来源规则；应暂停、记录并按边界处理。', next: '复习状态码、退避和失败队列。' },
+        { text: '保存原始响应或原始片段的主要作用是？', options: ['便于解析规则变化后的复核和重放', '保证数据一定正确', '替代所有结构化字段', '让请求速度变快'], answer: 0, why: '保留合适的原始证据能帮助排查解析错误，但仍需遵守来源和隐私边界。', next: '规划原始数据、清洗数据和结果数据的层次。' },
+        { text: '一个可交付的采集脚本至少应该说明什么？', options: ['来源、字段、运行命令、失败处理和输出位置', '只说明作者名字', '只给一张结果截图', '隐藏所有限制'], answer: 0, why: '别人需要知道能否运行、结果是什么、失败后如何恢复以及来源是否合规。', next: '完成爬虫项目的运行说明与数据字典。' }
+      ]
+    };
+    Object.keys(questionBankAdditions).forEach(key => quizData[key].questions.push(...questionBankAdditions[key]));
     const saveState = () => localStorage.setItem(stateKey, JSON.stringify(state));
     const toast = (message) => { const el = document.getElementById('toast'); el.textContent = message; el.classList.add('show'); clearTimeout(window.toastTimer); window.toastTimer = setTimeout(() => el.classList.remove('show'), 2600); };
     const switchView = (name) => {
@@ -560,7 +627,8 @@
       document.getElementById('unitList').innerHTML = track.units.map((item, index) => {
         const isCurrent = index === 0 && state.track === 'java';
         const status = isCurrent ? (state.taskCompleted ? '已完成' : '继续') : item[3];
-        return `<button class="unit-row ${isCurrent ? 'current' : 'locked'}" data-unit="${index}"><div class="unit-main"><div class="unit-no">${item[0]}</div><div class="unit-info"><h3>${item[1]}</h3><p>${item[2]}</p><div class="unit-meta"><span class="phase-chip learn">先学：知识 + 示例</span><span class="phase-chip practice">再练：引导 + 独立</span></div></div></div><div class="unit-status"><i class="status-dot ${isCurrent ? 'current' : ''}"></i>${status}</div></button>`;
+        const extra = (unitExtras[state.track] || [])[index] || ['知识点待补充', '产出待补充'];
+        return `<button class="unit-row ${isCurrent ? 'current' : 'locked'}" data-unit="${index}"><div class="unit-main"><div class="unit-no">${item[0]}</div><div class="unit-info"><h3>${item[1]}</h3><p>${item[2]}</p><div class="unit-content">${extra[0]} · ${extra[1]}</div><div class="unit-meta"><span class="phase-chip learn">先学：知识 + 示例</span><span class="phase-chip practice">再练：引导 + 独立</span></div></div></div><div class="unit-status"><i class="status-dot ${isCurrent ? 'current' : ''}"></i>${status}</div></button>`;
       }).join('');
       document.querySelectorAll('[data-unit]').forEach(item => item.addEventListener('click', () => { if (item.dataset.unit === '0' && state.track === 'java') switchView('task'); else toast('先完成前置单元的学习与示例复现，再解锁这里的练习'); }));
     };
@@ -593,24 +661,26 @@
       document.querySelectorAll('[data-note-index]').forEach(item => item.addEventListener('click', () => showNote(Number(item.dataset.noteIndex)))); showNote(0);
     };
     const renderArchive = () => renderProgress();
-    const renderQuizScores = () => Object.keys(quizData).forEach(key => { const score = state.quizScores[key]; const el = document.getElementById(`quizScore-${key}`); if (el) el.textContent = score == null ? '尚未完成' : `最近得分：${score} / 5 · 已生成复习建议`; });
-    let activeQuiz = null;
+    const renderQuizScores = () => { Object.keys(quizData).forEach(key => { const score = state.quizScores[key]; const el = document.getElementById(`quizScore-${key}`); if (el) el.textContent = score == null ? '尚未完成' : `最近得分：${score} / 8 · 已生成复习建议`; const button = document.querySelector(`[data-quiz="${key}"]`); const meta = button?.closest('.quiz-card')?.querySelector('.quiz-meta'); if (meta) meta.innerHTML = `<span>题库 ${quizData[key].questions.length} 题</span><span>本次抽 8 题</span><span>可重复练习</span>`; }); const totalQuestions = Object.values(quizData).reduce((sum, quiz) => sum + quiz.questions.length, 0); const notice = document.querySelector('.quiz-notice'); if (notice) notice.innerHTML = `当前题库共 ${totalQuestions} 题，三条路线各 ${quizData.java.questions.length} 题；每次随机抽 8 题。结果只用于安排下一次学习，不是能力认证。答错后会看到原因、关联单元和建议练习。`; };
+    let activeQuiz = null; let activeQuizQuestions = [];
     const openQuiz = (key) => {
       activeQuiz = key; const quiz = quizData[key];
+      activeQuizQuestions = quiz.questions.slice().sort(() => Math.random() - 0.5).slice(0, 8);
       document.getElementById('quizModalTitle').textContent = quiz.title;
       document.getElementById('quizResult').innerHTML = '';
-      document.getElementById('quizQuestions').innerHTML = quiz.questions.map((question, index) => `<div class="quiz-question"><h3>${index + 1}. ${question.text}</h3>${question.options.map((option, optionIndex) => `<label class="answer-option"><input type="radio" name="quiz-${key}-${index}" value="${optionIndex}"><span>${option}</span></label>`).join('')}</div>`).join('');
+      document.getElementById('quizQuestions').innerHTML = activeQuizQuestions.map((question, index) => `<div class="quiz-question"><h3>${index + 1}. ${question.text}</h3>${question.options.map((option, optionIndex) => `<label class="answer-option"><input type="radio" name="quiz-${key}-${index}" value="${optionIndex}"><span>${option}</span></label>`).join('')}</div>`).join('');
       openModal('quizModal');
     };
     const submitQuiz = () => {
       const quiz = quizData[activeQuiz]; if (!quiz) return;
       let score = 0; const missed = [];
-      quiz.questions.forEach((question, index) => { const selected = document.querySelector(`input[name="quiz-${activeQuiz}-${index}"]:checked`); if (selected && Number(selected.value) === question.answer) score += 1; else missed.push({ index, question }); });
-      if (document.querySelectorAll('#quizQuestions input:checked').length < quiz.questions.length) { toast('还有题目没有选择，先完成整套测验再提交'); return; }
+      activeQuizQuestions.forEach((question, index) => { const selected = document.querySelector(`input[name="quiz-${activeQuiz}-${index}"]:checked`); if (selected && Number(selected.value) === question.answer) score += 1; else missed.push({ index, question }); });
+      if (document.querySelectorAll('#quizQuestions input:checked').length < activeQuizQuestions.length) { toast('还有题目没有选择，先完成整套测验再提交'); return; }
+      state.quizWrong[activeQuiz] = missed.map(item => item.question.next);
       state.quizScores[activeQuiz] = score; saveState(); renderQuizScores();
       const recommendation = score >= 4 ? '基础判断已经有不错的起点，下一步把它放进项目代码和测试里。' : score >= 3 ? '核心概念有基础，建议回看错题关联单元，再做一次条件不同的练习。' : '先回到对应知识卡和示例，不急着堆项目数量；把每个错误判断写成一条复习笔记。';
-      document.getElementById('quizResult').innerHTML = `<div class="quiz-result"><strong>${score} / ${quiz.questions.length}</strong><p>${recommendation}</p>${missed.length ? `<div style="margin-top:11px;font-size:12px"><b>优先复习：</b>${missed.map(item => `${item.index + 1}. ${item.question.next}`).join('；')}</div>` : '<div style="margin-top:11px;font-size:12px"><b>下一步：</b>进入对应项目的引导练习，并用陌生数据再做一次。</div>'}</div>`;
-      toast(`测验完成：${score} / ${quiz.questions.length}`);
+      document.getElementById('quizResult').innerHTML = `<div class="quiz-result"><strong>${score} / ${activeQuizQuestions.length}</strong><p>${recommendation}</p>${missed.length ? `<div style="margin-top:11px;font-size:12px"><b>优先复习：</b>${missed.map(item => `${item.index + 1}. ${item.question.next}`).join('；')}</div>` : '<div style="margin-top:11px;font-size:12px"><b>下一步：</b>进入对应项目的引导练习，并用陌生数据再做一次。</div>'}</div>`;
+      toast(`测验完成：${score} / ${activeQuizQuestions.length}`);
     };
     const openTask = () => { state.taskStarted = true; saveState(); switchView('task'); };
     const openAIWithNote = (note) => { openModal('aiModal'); document.getElementById('aiQuestion').value = `我在学习 Java 第 01 单元时遇到“${note.type}”。\n\n实际现象：${note.actual || '未填写'}\n期待结果：${note.expected || '未填写'}\n已经尝试：${note.tried || '未填写'}\n\n请先给我排查思路和验证动作，不要直接给完整答案，也不要声称已经运行我的代码。`; updateAIPrompt(); };
