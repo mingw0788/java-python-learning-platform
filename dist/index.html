@@ -316,6 +316,55 @@
     .topic-cloud strong { display: block; font-size: 12px; margin-bottom: 8px; }
     .topic-tags { display: flex; flex-wrap: wrap; gap: 6px; }
     .topic-tag { color: var(--muted); background: #f4f6f8; border: 1px solid var(--line); border-radius: 99px; padding: 5px 8px; font-size: 11px; }
+    .roadmap-hero { padding: 23px; display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(260px, .8fr); gap: 20px; background: linear-gradient(135deg, #ffffff 0%, #f5f9fc 100%); border-left: 4px solid var(--orange); }
+    .roadmap-hero h2 { margin: 12px 0 7px; font-size: 24px; letter-spacing: -.04em; }
+    .roadmap-hero p { max-width: 720px; color: var(--muted); line-height: 1.7; margin: 0; }
+    .roadmap-metrics { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 9px; margin-top: 19px; }
+    .roadmap-metric { padding: 12px; border: 1px solid var(--line); border-radius: 12px; background: rgba(255,255,255,.75); }
+    .roadmap-metric strong { display: block; font-size: 20px; letter-spacing: -.04em; }
+    .roadmap-metric span { display: block; margin-top: 3px; color: var(--muted); font-size: 11px; }
+    .roadmap-rule { padding: 17px; border: 1px solid #d9e5ed; border-radius: 15px; background: #fff; align-self: stretch; }
+    .roadmap-rule-label { color: var(--orange); font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+    .roadmap-rule h3 { margin: 8px 0 12px; font-size: 16px; }
+    .roadmap-rule ul { margin: 0; padding-left: 18px; color: var(--muted); font-size: 12px; line-height: 1.8; }
+    .route-priority { margin-top: 14px; padding: 10px 11px; border-radius: 11px; background: #f7f9fb; color: #53647a; font-size: 12px; line-height: 1.55; }
+    .roadmap-layout { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(275px, .75fr); gap: 18px; align-items: start; }
+    .roadmap-main { min-width: 0; }
+    .roadmap-aside { display: grid; gap: 18px; min-width: 0; }
+    .roadmap-stage-list { display: grid; gap: 13px; }
+    .roadmap-stage { border: 1px solid var(--line); border-radius: 15px; padding: 17px; background: #fff; }
+    .roadmap-stage.current { border-color: #f3b18d; box-shadow: 0 10px 24px rgba(214,111,63,.09); background: #fffaf7; }
+    .roadmap-stage.done { border-color: #9cd2c2; background: #f8fffc; }
+    .roadmap-stage.locked { background: #fbfcfd; }
+    .stage-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+    .stage-heading { display: flex; gap: 11px; min-width: 0; }
+    .stage-number { flex: 0 0 37px; width: 37px; height: 37px; display: grid; place-items: center; border-radius: 11px; background: var(--blue-soft); color: var(--blue); font-weight: 850; font-size: 13px; }
+    .roadmap-stage.current .stage-number { background: var(--orange-soft); color: var(--orange); }
+    .roadmap-stage.done .stage-number { background: var(--teal-soft); color: var(--teal); }
+    .stage-heading h3 { margin: 0; font-size: 16px; }
+    .stage-heading p { margin: 4px 0 0; color: var(--muted); font-size: 12px; line-height: 1.5; }
+    .stage-week { flex: 0 0 auto; color: var(--muted); font-size: 11px; white-space: nowrap; }
+    .stage-goal { margin: 16px 0 11px; padding: 10px 11px; border-radius: 10px; background: rgba(246,248,250,.9); color: #53647a; font-size: 12px; line-height: 1.55; }
+    .stage-goal strong { color: var(--ink); }
+    .stage-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; }
+    .stage-cell { padding: 10px 11px; border: 1px solid #e7edf1; border-radius: 11px; background: #fff; }
+    .stage-cell strong { display: block; color: var(--muted); font-size: 11px; }
+    .stage-cell p { margin: 5px 0 0; color: var(--ink); font-size: 12px; line-height: 1.5; }
+    .stage-footer { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; margin-top: 13px; }
+    .stage-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+    .stage-tag { padding: 4px 7px; border-radius: 99px; background: #f1f4f7; color: var(--muted); font-size: 11px; }
+    .stage-tag.learn { background: var(--blue-soft); color: var(--blue); }
+    .stage-tag.practice { background: var(--orange-soft); color: #be5b2c; }
+    .stage-action { border: 0; background: transparent; color: var(--blue); font-size: 12px; font-weight: 800; padding: 4px 0; cursor: pointer; }
+    .stage-action:hover { color: var(--orange); }
+    .roadmap-next { padding: 14px; border-radius: 13px; background: #fffaf7; border: 1px solid #f3d4c3; }
+    .roadmap-next h3 { margin: 6px 0 6px; font-size: 17px; }
+    .roadmap-next p { color: var(--muted); margin: 0; line-height: 1.6; font-size: 12px; }
+    .roadmap-check { display: grid; grid-template-columns: 26px 1fr; gap: 8px; align-items: start; padding: 11px 0; border-bottom: 1px solid var(--line); }
+    .roadmap-check:last-child { border-bottom: 0; padding-bottom: 0; }
+    .roadmap-check b { width: 22px; height: 22px; display: grid; place-items: center; border-radius: 7px; color: var(--teal); background: var(--teal-soft); font-size: 12px; }
+    .roadmap-check strong { display: block; font-size: 13px; }
+    .roadmap-check span { display: block; color: var(--muted); font-size: 12px; line-height: 1.5; margin-top: 3px; }
     .project-library { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
     .project-mini-card { border: 1px solid var(--line); border-radius: 14px; padding: 15px; background: #fff; display: flex; flex-direction: column; min-height: 205px; }
     .project-mini-card:hover { border-color: #c8d4e1; box-shadow: 0 8px 20px rgba(18,33,58,.05); }
@@ -378,6 +427,9 @@
       .detail-header .primary-btn { margin-top: 15px; }
       .unit-row { align-items: start; }
       .unit-status { display: none; }
+      .roadmap-hero, .roadmap-layout { grid-template-columns: 1fr; }
+      .stage-head { display: block; }
+      .stage-week { display: block; margin: 8px 0 0 48px; }
       .modal-backdrop { padding: 12px; }
     }
     @media (max-width: 440px) {
@@ -441,7 +493,12 @@
           <div style="margin-top:24px"><div class="section-head"><div><h2>最近发生</h2><p>阅读、练习和求助分开记录，不把打开视频当作掌握。</p></div></div><div class="card card-pad"><div class="activity-list"><div class="activity"><div class="activity-mark">阅</div><div><strong>打开了「文件路径与终端」</strong><span>刚刚 · 阅读记录已保存，尚未计入独立完成</span></div></div><div class="activity"><div class="activity-mark" style="background:var(--orange-soft);color:var(--orange)">→</div><div><strong>系统为你安排了下一步</strong><span>今天 · 15 分钟 · 修改输入并再次运行</span></div></div><div class="activity"><div class="activity-mark" style="background:var(--yellow-soft);color:#a97810">!</div><div><strong>试点提示</strong><span>本地记录可导出；平台没有执行你的代码，也不会自动标记任务通过。</span></div></div></div></div></div>
         </section>
 
-        <section class="view" id="view-roadmap"><div class="intro-row"><div><div class="eyebrow">学习路线</div><h1>先学会，再把知识用在项目里</h1><p>三条路线共用同一套学习节奏：知识卡 → 可运行示例 → 引导练习 → 独立练习 → 项目任务。</p></div><div class="date-note">Java 40 · Python 24 · 爬虫 18 单元规划</div></div><div class="grid grid-2"><article class="card list-card"><div class="section-head"><div><h2 id="trackTitle">Java 后端开发</h2><p id="trackDescription">从文件与语法开始，走到数据库、接口、权限和交付。</p></div><span class="project-kicker" id="trackCount">1 / 40</span></div><div class="track-switcher"><button class="active" data-track="java">Java 后端</button><button data-track="python">Python 自动化</button><button data-track="crawler">Python 爬虫</button></div><p class="track-caption">当前路线会先展示要学的知识和示例，再开放对应的练习入口；没有看懂示例时，不会把练习标成“可独立完成”。</p><div class="learning-sequence"><div class="sequence-step"><b>01</b><span>学知识</span></div><div class="sequence-step"><b>02</b><span>跟着示例做</span></div><div class="sequence-step"><b>03</b><span>引导练习</span></div><div class="sequence-step"><b>04</b><span>独立练习</span></div></div><div class="unit-list" id="unitList"></div><div class="content-notice">内容库存正在按任务逐项核验。已显示的数量是课程规划基线，不把“规划中”冒充成已经发布并验证完成。</div></article><article class="card list-card"><div class="section-head"><div><h2>学习证据</h2><p>把看过、做过、检查过分开。</p></div></div><div class="mini-stat"><span>已阅读</span><strong>1 / 40</strong></div><div class="mini-stat"><span>已复现示例</span><strong id="roadmapReproduced">0 / 40</strong></div><div class="mini-stat"><span>已完成引导练习</span><strong id="roadmapPractice">0 / 40</strong></div><div class="mini-stat"><span>独立能力证据</span><strong>0 / 40</strong></div><div class="track-inventory"><div class="inventory-item"><strong>40</strong><span>Java 单元</span></div><div class="inventory-item"><strong>24</strong><span>Python 单元</span></div><div class="inventory-item"><strong>18</strong><span>爬虫单元</span></div></div><div class="note-block" style="margin-top:19px"><strong>当前学习规则</strong><p>先完成本单元的知识卡和示例复现，再进入引导练习；独立练习至少改变业务条件、输入结构、异常情况或实现约束中的一项。</p></div><button class="primary-btn" style="margin-top:7px" id="roadmapContinue">打开当前单元</button></article></div></section>
+        <section class="view" id="view-roadmap">
+          <div class="intro-row"><div><div class="eyebrow">就业学习路线</div><h1>按岗位能力推进，不按目录堆知识</h1><p>先把 Java 后端作为求职主线，再用 Python 和爬虫形成可展示的差异化项目。每个阶段都要留下练习、作品和过关证据。</p></div><div class="date-note" id="roadmapPlanLabel">24 周主线 · 2 条支线</div></div>
+          <article class="card roadmap-hero"><div><span class="project-kicker" id="trackRole">Java 后端实习 / 校招主线</span><h2 id="trackTitle">Java 后端开发</h2><p id="trackDescription">从能运行代码，逐步走到能解释业务规则、写接口、处理异常并完成项目交付。</p><div class="roadmap-metrics"><div class="roadmap-metric"><strong id="trackWeeks">24</strong><span>预计周数</span></div><div class="roadmap-metric"><strong id="trackStageCount">8</strong><span>阶段数量</span></div><div class="roadmap-metric"><strong id="trackProjectCount">3</strong><span>核心作品</span></div></div></div><div class="roadmap-rule"><div class="roadmap-rule-label">学习纪律</div><h3>一个阶段只保留一个主线产出</h3><ul><li>先学概念和可运行示例</li><li>再做同题引导练习</li><li>最后换业务条件独立完成</li><li>测验不过关就回看，不盲目赶进度</li></ul><div class="route-priority" id="trackPriority">建议顺序：Java 主线 → Spring Boot 项目 → Python / 爬虫支线。</div></div></article>
+          <div class="track-switcher"><button class="active" data-track="java">Java 后端主线</button><button data-track="python">Python 自动化支线</button><button data-track="crawler">Python 爬虫支线</button></div>
+          <div class="roadmap-layout"><article class="card list-card roadmap-main"><div class="section-head"><div><h2>阶段地图</h2><p id="trackCaption">每个阶段都写清楚学什么、练什么、交什么，以及什么标准算过关。</p></div><span class="project-kicker" id="trackCount">8 个阶段</span></div><div class="learning-sequence"><div class="sequence-step"><b>01</b><span>学知识</span></div><div class="sequence-step"><b>02</b><span>跟示例</span></div><div class="sequence-step"><b>03</b><span>改条件</span></div><div class="sequence-step"><b>04</b><span>做测验</span></div><div class="sequence-step"><b>05</b><span>交作品</span></div></div><div class="roadmap-stage-list" id="unitList"></div><div class="content-notice">阶段数量是学习规划，不等于平台已经替你完成课程。真正的完成证据来自你的代码、运行记录、测试说明和复盘。</div></article><aside class="roadmap-aside"><article class="card list-card"><div class="section-head"><div><h2>现在做什么</h2><p>不要同时开十个课程。</p></div><span class="project-kicker" id="roadmapCurrentBadge">进行中</span></div><div class="roadmap-next"><div class="eyebrow">当前阶段</div><h3 id="roadmapNextTitle">环境与可运行闭环</h3><p id="roadmapNextCopy">先让程序真正跑起来，再记录你改了什么、看到什么、如何确认结果。</p></div><div id="trackTopics" class="topic-cloud"></div><button class="primary-btn" style="margin-top:16px;width:100%" id="roadmapContinue">进入当前阶段</button></article><article class="card list-card"><div class="section-head"><div><h2>阶段过关条件</h2><p>这四项比“看完视频”更重要。</p></div></div><div class="roadmap-check"><b>1</b><div><strong>能复述</strong><span>用自己的话说清楚概念解决什么问题。</span></div></div><div class="roadmap-check"><b>2</b><div><strong>能运行</strong><span>示例可以在自己的环境中运行并解释结果。</span></div></div><div class="roadmap-check"><b>3</b><div><strong>能变式</strong><span>改变输入、业务规则或异常条件后仍能完成。</span></div></div><div class="roadmap-check"><b>4</b><div><strong>能交付</strong><span>留下 README、测试记录、已知限制和下一步。</span></div></div></article><article class="card list-card"><div class="section-head"><div><h2>三条路线怎么选</h2><p>按照就业目标安排精力。</p></div></div><div class="route-priority"><strong>Java 后端</strong><br>优先投入，覆盖 Java、SQL、Spring Boot、接口、测试和项目交付。</div><div class="route-priority"><strong>Python 自动化</strong><br>用来补足数据处理、脚本效率和业务工具能力。</div><div class="route-priority"><strong>Python 爬虫</strong><br>作为专题项目，重点练习来源边界、解析、增量和数据质量。</div></article></aside></div>
+        </section>
 
         <section class="view" id="view-projects"><div class="intro-row"><div><div class="eyebrow">项目实战</div><h1>每条路线都要有能交付的项目</h1><p>先学知识与示例，再做引导练习，最后用陌生数据完成独立需求变更。</p></div><div class="date-note">8 个项目规划 · 12 个独立变更</div></div><div class="grid grid-2"><article class="card project-card"><span class="project-kicker">Java 项目 01 · 进行中</span><h3>设备台账工具</h3><p>从 CSV 导入、字段校验到查询和导出，练习把一份业务说明拆成可运行的 Java 小工具。</p><div class="project-progress"><i class="done"></i><i class="current"></i><i></i><i></i><i></i></div><div class="project-foot"><span>1 / 5 个里程碑</span><span>命令行阶段</span></div><div class="milestone-list"><div class="milestone done"><i>✓</i><span>读懂需求与样例数据</span></div><div class="milestone current"><i></i><span>导入并校验设备编号</span></div><div class="milestone"><i></i><span>保存、查询与导出</span></div><div class="milestone"><i></i><span>失败记录与测试</span></div><div class="milestone"><i></i><span>整理运行说明与复盘</span></div></div><button class="primary-btn" style="margin-top:15px" id="projectTaskBtn">继续项目任务</button></article><article class="card project-card"><span class="project-kicker" style="color:var(--blue);background:var(--blue-soft)">Java 项目 02 · 待开始</span><h3>设备借用管理后端</h3><p>升级为多人使用的接口服务，练习角色权限、状态变化、重复提交、事务和交付说明。</p><div class="project-progress"><i></i><i></i><i></i><i></i><i></i></div><div class="project-foot"><span>0 / 6 个里程碑</span><span>Spring Boot · SQL</span></div><div class="milestone-list"><div class="milestone"><i></i><span>澄清角色、字段与业务规则</span></div><div class="milestone"><i></i><span>设计表结构与初始化脚本</span></div><div class="milestone"><i></i><span>实现查询与借用接口</span></div><div class="milestone"><i></i><span>处理审批、归还与权限</span></div><div class="milestone"><i></i><span>补充异常用例与回归检查</span></div><div class="milestone"><i></i><span>交付代码、说明与复盘</span></div></div><button class="secondary-btn" style="margin-top:15px" disabled>完成项目 01 后解锁</button></article></div><article class="card list-card" style="margin-top:18px"><div class="section-head"><div><h2>完整项目库</h2><p>项目按“知识准备 → 示例复现 → 引导练习 → 独立交付”组织，不只堆项目名称。</p></div><span class="project-kicker" style="color:var(--muted);background:#f1f3f6">规划中 · 待逐项验证</span></div><div class="project-library"><article class="project-mini-card"><span class="project-kicker">Java · 业务工具</span><h3>会议室预约管理</h3><p>处理时间冲突、重复提交、取消和查询筛选，练习集合、异常与业务规则。</p><div class="project-detail"><span>先修：集合 / 异常</span><span>交付：CLI + 测试</span></div></article><article class="project-mini-card"><span class="project-kicker">Java · 后端接口</span><h3>工单与 SLA 管理 API</h3><p>从需求澄清到接口、状态流转、角色权限和日志排错，完成一套可调用后端。</p><div class="project-detail"><span>先修：SQL / HTTP</span><span>交付：API + 文档</span></div></article><article class="project-mini-card"><span class="project-kicker">Java · 数据库</span><h3>课程作业提交与评审</h3><p>设计学生、作业、提交版本和评语关联，练习事务、权限边界与回归检查。</p><div class="project-detail"><span>先修：事务 / 权限</span><span>交付：脚本 + 测试</span></div></article><article class="project-mini-card"><span class="project-kicker" style="color:var(--teal);background:var(--teal-soft)">Python · 文件自动化</span><h3>多表合并与数据清洗工具</h3><p>合并多份 CSV / Excel，处理缺失、重复、日期格式和错误行，输出可追溯结果。</p><div class="project-detail"><span>先修：路径 / CSV</span><span>交付：脚本 + 报告</span></div></article><article class="project-mini-card"><span class="project-kicker" style="color:var(--teal);background:var(--teal-soft)">Python · 业务报表</span><h3>销售数据周报生成器</h3><p>读取订单数据，按规则统计并生成报表，记录输入口径、失败记录和输出版本。</p><div class="project-detail"><span>先修：字典 / JSON</span><span>交付：报表 + 说明</span></div></article><article class="project-mini-card"><span class="project-kicker" style="color:var(--teal);background:var(--teal-soft)">Python · 接口取数</span><h3>公开 API 数据巡检</h3><p>调用授权接口，处理超时、有限重试、分页和结果核对，保存结构化数据。</p><div class="project-detail"><span>先修：HTTP / JSON</span><span>交付：日志 + 数据</span></div></article><article class="project-mini-card"><span class="project-kicker" style="color:#4c5ba8;background:#eef0ff">爬虫 · 练习站</span><h3>分页列表采集与去重</h3><p>在可控练习站采集分页数据，加入请求间隔、去重、失败记录和增量保存。</p><div class="project-detail"><span>先修：HTTPX / 解析</span><span>交付：CSV + 日志</span></div></article><article class="project-mini-card"><span class="project-kicker" style="color:#4c5ba8;background:#eef0ff">爬虫 · 动态页面</span><h3>公共数据检索助手</h3><p>针对授权公开数据，识别静态与动态场景，按需使用 Playwright 并保留来源与核对结果。</p><div class="project-detail"><span>先修：分页 / 存储</span><span>交付：来源 + 结果</span></div></article></div><div class="content-notice">爬虫路线只使用授权来源或练习站，重点学习请求、解析、分页、去重、增量、有限重试和日志；不把验证码绕过、对抗封禁或采集个人资料作为课程目标。</div></article><article class="card list-card" style="margin-top:18px"><div class="section-head"><div><h2>独立需求变更</h2><p>每个项目至少准备 3 个条件不同的变更，完成其中 1 个后才能记录为独立交付。</p></div><span class="project-kicker" style="color:var(--muted);background:#f1f3f6">12 题规划</span></div><div class="practice-board"><div class="practice-card"><h3>Java 变更题</h3><p>从设备借用项目选择一项：</p><ul><li>增加预约并处理时间冲突</li><li>增加延期申请与审批</li><li>增加批量导入错误清单</li></ul></div><div class="practice-card"><h3>Python / 爬虫变更题</h3><p>从数据工具选择一项：</p><ul><li>输入文件增加缺失列</li><li>接口分页顺序发生变化</li><li>重复运行不得重复写入</li></ul></div></div></article></section>
 
@@ -483,37 +540,44 @@
     let state = { ...defaultState, ...JSON.parse(localStorage.getItem(stateKey) || '{}') };
     const trackData = {
       java: {
-        title: 'Java 后端开发', description: '从文件与语法开始，走到数据库、接口、权限和交付。', count: '1 / 40',
+        title: 'Java 后端开发', role: 'Java 后端实习 / 校招主线', weeks: 24, projects: 3, count: '8 个阶段',
+        description: '从能运行代码，逐步走到能解释业务规则、写接口、处理异常并完成项目交付。',
+        priority: '建议顺序：先完成 Java 主线，再用 Spring Boot 项目证明后端能力，最后补 Python / 爬虫差异化。',
         units: [
-          ['01', '环境与开发基本操作', '文件、终端、JDK、编辑器、依赖、Git', '进行中', '能独立运行、修改和再次运行程序'],
-          ['02', 'Java 基础与输入处理', '类型、变量、分支、循环、方法、字符串、集合', '待开始', '把文字需求拆成带边界检查的小程序'],
-          ['03', '对象、文件与异常', '对象职责、文件读写、异常分类、日志和基础测试', '待开始', '交付一个可恢复的台账命令行工具'],
-          ['04', '数据库与 SQL', '表结构、约束、查询、关联、事务和必要索引', '待开始', '用脚本初始化数据并验证失败回滚'],
-          ['05', 'HTTP 与后端接口', '请求响应、JSON、参数校验、分层和数据库访问', '待开始', '按接口说明完成正常与异常调用'],
-          ['06', '业务规则与质量', '登录权限、状态变化、重复提交、配置和测试', '待开始', '让借用业务在边界条件下保持一致'],
-          ['07', '项目交付与修改', '打包、启动、日志诊断、说明文档和需求变更', '待开始', '接手已有版本并完成一项新需求']
+          { no: '01', title: '环境与可运行闭环', summary: '终端、JDK、编辑器、Git、目录与最小程序', week: '第 1-2 周', goal: '建立“输入 → 运行 → 观察 → 修改 → 再验证”的基本工作流。', learn: 'JDK、命令行、变量、编译与运行', practice: '修改 Hello 程序并记录实际输出', output: '环境检查表 + 运行记录', gate: '能在自己的电脑独立运行并解释结果', status: '进行中', prereq: '零基础可开始' },
+          { no: '02', title: 'Java 语法、集合与对象', summary: '类型、分支、循环、方法、集合、泛型和对象职责', week: '第 3-5 周', goal: '把文字需求拆成清晰的数据结构和小方法，而不是堆 if。', learn: 'List / Set / Map、类、封装与方法', practice: '设备台账查询、重复编号校验与筛选', output: '可查询的命令行小工具', gate: '能说明为什么选某种集合，并覆盖边界输入', status: '待开始', prereq: '先完成第 01 阶段' },
+          { no: '03', title: '文件、异常与可测试代码', summary: '文件读写、异常分类、日志、方法拆分和单元测试', week: '第 6-8 周', goal: '让程序遇到坏数据时能说明问题、保留上下文并继续交付。', learn: 'IO、异常、日志、JUnit 基础', practice: '导入错误清单、重复提交和失败恢复', output: '设备台账 CLI v1 + 测试记录', gate: '至少覆盖正常、缺失、重复和非法格式', status: '待开始', prereq: '第 02 阶段的集合与对象' },
+          { no: '04', title: 'SQL、MySQL 与数据建模', summary: '表结构、主键、唯一约束、关联查询、事务与索引', week: '第 9-12 周', goal: '知道数据如何存、如何查，以及业务规则为什么不能只写在页面。', learn: 'DDL、CRUD、JOIN、事务与执行计划', practice: '设计设备借用表并验证回滚和重复数据', output: '建库脚本 + 查询清单 + 失败记录', gate: '能解释主键、唯一约束和事务边界', status: '待开始', prereq: '第 03 阶段的文件与异常' },
+          { no: '05', title: 'HTTP、Spring Boot 与 REST', summary: '请求响应、JSON、Controller、Service、Repository 和校验', week: '第 13-16 周', goal: '把命令行业务升级为别人可以调用的接口服务。', learn: 'HTTP 方法、状态码、分层、参数校验', practice: '完成设备查询、申请、归还与异常响应', output: '设备借用 API + 接口说明', gate: '正常、参数错误、资源不存在和业务冲突都有响应', status: '待开始', prereq: '第 04 阶段的 SQL' },
+          { no: '06', title: '权限、状态与事务一致性', summary: '角色、状态机、幂等、重复提交、回滚和审计日志', week: '第 17-19 周', goal: '让多人使用时业务规则不被越权、并发和重复请求破坏。', learn: '认证授权、状态流转、事务和幂等', practice: '补充审批、归还、取消和越权测试', output: '业务规则测试表 + 审计日志样例', gate: '能画状态图并列出至少 6 个失败用例', status: '待开始', prereq: '第 05 阶段的接口分层' },
+          { no: '07', title: '工程质量与可维护性', summary: '配置、日志排错、测试分层、Git、打包和基础部署', week: '第 20-21 周', goal: '把“能跑”提升为别人能接手、能排错、能回归。', learn: '配置分离、日志字段、测试策略与提交习惯', practice: '制造一条故障并用日志定位，再做回归', output: 'README + 配置示例 + 测试报告', gate: '别人按文档能启动并复现核心流程', status: '待开始', prereq: '第 06 阶段的稳定业务规则' },
+          { no: '08', title: '完整项目与求职表达', summary: '需求澄清、版本迭代、需求变更、简历项目和面试复盘', week: '第 22-24 周', goal: '把项目整理成可以讲清楚、展示和继续修改的作品。', learn: '需求拆解、技术取舍、项目复盘与面试题', practice: '接手陌生需求并完成一项变更', output: '可运行项目 + 简历项目描述 + 面试问答', gate: '能用 3 分钟讲清背景、方案、难点和验证证据', status: '待开始', prereq: '前 07 个阶段全部完成' }
         ]
       },
       python: {
-        title: 'Python 自动化与数据处理', description: '从脚本和文件处理开始，走到接口取数、清洗和可复用报表。', count: '1 / 24',
+        title: 'Python 自动化与数据处理', role: 'Python 业务工具支线', weeks: 10, projects: 2, count: '6 个阶段',
+        description: '用 Python 解决文件、数据和接口任务，形成能复用、可排错、可交付的业务工具。',
+        priority: '适合在 Java 基础稳定后并行学习：每周 2 次练习，用一个真实业务数据工具形成作品。',
         units: [
-          ['01', 'Python 环境与脚本', '解释器、终端、路径、虚拟环境、运行与调试', '待开始', '能运行脚本并区分路径与代码错误'],
-          ['02', '数据类型与流程控制', '字符串、列表、字典、集合、条件、循环、函数', '待开始', '把重复手工步骤写成可修改的函数'],
-          ['03', '文件、CSV 与 JSON', '编码、路径、表头、缺失值、格式校验和输出', '待开始', '生成带错误清单的数据处理结果'],
-          ['04', '多表合并与清洗', '字段映射、重复判定、日期金额、日志与可追溯性', '待开始', '交付多份业务文件合并工具'],
-          ['05', 'HTTP 接口与重试', '请求、参数、响应、超时、有限重试、分页', '待开始', '获取授权 API 数据并保存原始响应'],
-          ['06', '报表与自动化交付', '统计口径、报告输出、配置、定时运行与说明', '待开始', '交付一份可重复生成的业务周报']
+          { no: '01', title: '环境、路径与脚本闭环', summary: '解释器、虚拟环境、终端、pathlib、参数与调试', week: '第 1 周', goal: '不再把“路径错”和“代码错”混在一起，能重复运行脚本。', learn: 'Python 版本、venv、pathlib、命令行', practice: '按参数读取并整理一个目录', output: '可重复运行的文件整理脚本', gate: '换一个目录仍能运行并说明输入输出', status: '待开始', prereq: 'Java 第 01 阶段或同等基础' },
+          { no: '02', title: '数据结构与函数拆分', summary: '列表、字典、集合、元组、循环、函数和模块', week: '第 2-3 周', goal: '用数据结构表达业务关系，用函数减少重复和隐式规则。', learn: '键值映射、唯一集合、函数参数与返回值', practice: '成绩表或设备表的筛选、分组与去重', output: '可测试的处理函数集合', gate: '能为函数写输入、输出和边界样例', status: '待开始', prereq: '第 01 阶段的脚本运行' },
+          { no: '03', title: 'CSV、JSON 与数据清洗', summary: '编码、表头、缺失值、重复、日期金额和错误行', week: '第 4-5 周', goal: '输出结果的同时保留错误上下文，不静默修改原始数据。', learn: 'csv / json、字段字典、校验与错误清单', practice: '合并多份业务文件并输出异常报告', output: '多表清洗工具 + 字段说明', gate: '覆盖缺失列、非法日期、重复键和空文件', status: '待开始', prereq: '第 02 阶段的数据结构' },
+          { no: '04', title: 'HTTP API 与有限重试', summary: '请求、响应、状态码、超时、分页、重试与原始数据保存', week: '第 6-7 周', goal: '让脚本面对短暂网络失败时有边界、有记录、可补采。', learn: 'HTTP、JSON 响应、超时、退避与分页', practice: '调用授权 API 并保存成功与失败响应', output: '接口取数脚本 + 运行日志', gate: '有限重试、不重复写入，能解释最终失败原因', status: '待开始', prereq: '第 03 阶段的输入输出约定' },
+          { no: '05', title: '报表、配置与测试', summary: '统计口径、配置分离、日志、测试数据和结果核对', week: '第 8-9 周', goal: '把一次性脚本升级为同事可以复用的业务报表工具。', learn: '统计口径、配置、日志、pytest 基础', practice: '生成销售周报并对边界数据做回归', output: '可重复周报 + 测试样例', gate: '输入版本、统计口径和输出文件都可追溯', status: '待开始', prereq: '第 04 阶段的接口与数据' },
+          { no: '06', title: '自动化项目与作品交付', summary: '需求说明、命令行体验、依赖、README 和简历表达', week: '第 10 周', goal: '把 Python 工具整理成一个可以放入作品集的完整项目。', learn: '项目结构、交付清单、限制说明与复盘', practice: '接入一个新增字段或新业务规则', output: '数据处理项目 + README + 变更记录', gate: '能说清业务价值、错误处理和下一步改造', status: '待开始', prereq: '前 05 个阶段完成' }
         ]
       },
       crawler: {
-        title: 'Python 爬虫与数据采集', description: '从 HTTP 和解析基础开始，走到分页、去重、增量、动态页面和日志。', count: '1 / 18',
+        title: 'Python 爬虫与数据采集', role: '爬虫 / 数据采集专题支线', weeks: 8, projects: 2, count: '6 个阶段',
+        description: '在授权来源或本地练习站中，学习请求、解析、分页、去重、增量和数据质量。',
+        priority: '不要把“能抓到页面”当作终点：先确认来源边界，再交付可复核的数据和运行日志。',
         units: [
-          ['01', 'HTTP 请求与来源边界', '请求方法、状态码、请求间隔、授权来源与 robots', '待开始', '能说明数据来源、访问范围与使用限制'],
-          ['02', 'HTML / JSON 解析', '选择器、字段字典、缺失节点、编码与结果核对', '待开始', '从练习页面提取结构化记录'],
-          ['03', '分页、排序与限速', '分页参数、停止条件、间隔、超时与有限重试', '待开始', '稳定采集多页数据并记录失败页'],
-          ['04', '去重与增量保存', '唯一键、断点、追加写入、重复运行和版本', '待开始', '重复运行不产生重复业务记录'],
-          ['05', '动态页面按需处理', '识别 JS 渲染、Playwright 同步接口和资源控制', '待开始', '只在静态方式不足时引入浏览器'],
-          ['06', '采集任务交付', '日志、来源、数据字典、结果核对和运行说明', '待开始', '把采集脚本交付给别人复用']
+          { no: '01', title: '来源边界与 HTTP 基础', summary: '授权范围、robots、请求方法、状态码、间隔和超时', week: '第 1 周', goal: '先学会判断什么能采、为什么采、采多少，再写请求代码。', learn: '来源登记、HTTP 请求、状态码与请求节奏', practice: '访问授权练习源并记录请求与响应', output: '来源说明 + 请求检查表', gate: '能说清数据用途、访问边界和停止条件', status: '待开始', prereq: 'Python 第 01 阶段或同等基础' },
+          { no: '02', title: 'HTML / JSON 解析与字段字典', summary: '选择器、嵌套结构、缺失节点、编码和字段核对', week: '第 2 周', goal: '把页面内容转换为稳定字段，而不是复制一段看似完整的文本。', learn: 'BeautifulSoup / lxml、JSON、字段字典', practice: '从练习页面提取列表并标记缺失字段', output: '解析器 + 字段说明 + 样例结果', gate: '页面少字段时不崩溃，结果能回指来源', status: '待开始', prereq: '第 01 阶段的 HTTP 与边界' },
+          { no: '03', title: '分页、限速与失败补采', summary: '分页参数、停止信号、排序、超时、有限重试和失败页', week: '第 3-4 周', goal: '稳定完成多页任务，既不漏页，也不无限请求。', learn: '分页策略、退避、失败队列和运行摘要', practice: '采集分页列表并模拟 429 / 503 / 空页', output: '分页采集脚本 + 失败页清单', gate: '能证明采了哪些页、失败哪些页、如何补采', status: '待开始', prereq: '第 02 阶段的解析结果' },
+          { no: '04', title: '唯一键、去重与增量', summary: '来源 ID、组合键、断点、追加写入、更新和版本', week: '第 5 周', goal: '重复运行不会重复造数据，新增和更新都能解释。', learn: '唯一键设计、幂等、增量窗口和断点保存', practice: '同一任务运行两次并比较结果差异', output: '去重增量模块 + 对比报告', gate: '能解释为什么一条记录被新增、更新或跳过', status: '待开始', prereq: '第 03 阶段的稳定采集' },
+          { no: '05', title: '动态页面与数据存储', summary: '静态 / 动态判断、Playwright 按需使用、CSV / SQLite 和资源控制', week: '第 6-7 周', goal: '只在静态方式不足时使用浏览器，并把结果保存成可复用数据。', learn: '渲染判断、浏览器自动化、存储和资源释放', practice: '完成一个静态源与一个动态模拟源的对比', output: '采集结果库 + 来源 URL + 数据字典', gate: '工具选择有理由，资源使用和失败行为可说明', status: '待开始', prereq: '第 04 阶段的增量设计' },
+          { no: '06', title: '采集项目交付与质量复盘', summary: '日志、质量检查、来源追溯、合规边界和项目表达', week: '第 8 周', goal: '交付的不只是脚本，还包括结果可信度和别人接手所需的说明。', learn: '质量指标、运行摘要、README 和限制说明', practice: '完成一次字段变更并补充回归检查', output: '采集项目 + 质量报告 + 简历项目描述', gate: '能回答来源、完整性、重复、失败和后续维护问题', status: '待开始', prereq: '前 05 个阶段完成' }
         ]
       }
     };
@@ -776,31 +840,42 @@
     const closeModal = (id) => document.getElementById(id).classList.remove('open');
     const renderUnits = () => {
       const track = trackData[state.track] || trackData.java;
+      const completedCurrent = state.taskCompleted && state.track === 'java';
       document.getElementById('trackTitle').textContent = track.title;
       document.getElementById('trackDescription').textContent = track.description;
+      document.getElementById('trackRole').textContent = track.role;
+      document.getElementById('trackWeeks').textContent = track.weeks;
+      document.getElementById('trackStageCount').textContent = track.units.length;
+      document.getElementById('trackProjectCount').textContent = track.projects;
       document.getElementById('trackCount').textContent = track.count;
+      document.getElementById('trackPriority').textContent = track.priority;
+      document.getElementById('roadmapPlanLabel').textContent = `${track.weeks} 周路径 · ${track.units.length} 个阶段`;
       document.querySelectorAll('[data-track]').forEach(button => button.classList.toggle('active', button.dataset.track === state.track));
-      let topicCloud = document.getElementById('trackTopics');
-      if (!topicCloud) { topicCloud = document.createElement('div'); topicCloud.id = 'trackTopics'; document.getElementById('roadmapContinue').before(topicCloud); }
-      topicCloud.className = 'topic-cloud';
+      const current = track.units[0];
+      document.getElementById('roadmapNextTitle').textContent = current.title;
+      document.getElementById('roadmapNextCopy').textContent = current.goal;
+      document.getElementById('roadmapCurrentBadge').textContent = completedCurrent ? '已完成，可复盘' : '当前阶段';
+      const topicCloud = document.getElementById('trackTopics');
       topicCloud.innerHTML = `<strong>本路线覆盖的企业技能</strong><div class="topic-tags">${(topicMap[state.track] || []).map(topic => `<span class="topic-tag">${topic}</span>`).join('')}</div>`;
       document.getElementById('unitList').innerHTML = track.units.map((item, index) => {
-        const isCurrent = index === 0 && state.track === 'java';
-        const status = isCurrent ? (state.taskCompleted ? '已完成' : '继续') : item[3];
-        const extra = (unitExtras[state.track] || [])[index] || ['知识点待补充', '产出待补充'];
-        return `<button class="unit-row ${isCurrent ? 'current' : 'locked'}" data-unit="${index}"><div class="unit-main"><div class="unit-no">${item[0]}</div><div class="unit-info"><h3>${item[1]}</h3><p>${item[2]}</p><div class="unit-content">${extra[0]} · ${extra[1]}</div><div class="unit-meta"><span class="phase-chip learn">先学：知识 + 示例</span><span class="phase-chip practice">再练：引导 + 独立</span></div></div></div><div class="unit-status"><i class="status-dot ${isCurrent ? 'current' : ''}"></i>${status}</div></button>`;
+        const isCurrent = index === 0;
+        const isDone = isCurrent && completedCurrent;
+        const stateLabel = isDone ? '已完成' : isCurrent ? '当前阶段' : '待解锁';
+        const actionLabel = isCurrent ? (isDone ? '重新查看任务 →' : '进入阶段 →') : `先完成第 ${String(index).padStart(2, '0')} 阶段`;
+        return `<article class="roadmap-stage ${isCurrent ? 'current' : 'locked'} ${isDone ? 'done' : ''}"><div class="stage-head"><div class="stage-heading"><div class="stage-number">${item.no}</div><div><h3>${item.title}</h3><p>${item.summary}</p></div></div><div class="stage-week">${item.week} · ${stateLabel}</div></div><div class="stage-goal"><strong>本阶段目标：</strong>${item.goal}</div><div class="stage-grid"><div class="stage-cell"><strong>先学</strong><p>${item.learn}</p></div><div class="stage-cell"><strong>再练</strong><p>${item.practice}</p></div><div class="stage-cell"><strong>要交付</strong><p>${item.output}</p></div><div class="stage-cell"><strong>过关标准</strong><p>${item.gate}</p></div></div><div class="stage-footer"><div class="stage-tags"><span class="stage-tag learn">先学：知识 + 示例</span><span class="stage-tag practice">再练：变式 + 测验</span><span class="stage-tag">先修：${item.prereq}</span></div><button class="stage-action" data-stage="${index}">${actionLabel}</button></div></article>`;
       }).join('');
-      document.querySelectorAll('[data-unit]').forEach(item => item.addEventListener('click', () => { if (item.dataset.unit === '0' && state.track === 'java') switchView('task'); else toast('先完成前置单元的学习与示例复现，再解锁这里的练习'); }));
+      document.querySelectorAll('[data-stage]').forEach(item => item.addEventListener('click', () => { const index = Number(item.dataset.stage); if (index === 0) { if (state.track === 'java') openTask(); else toast(`${track.title}的任务内容会按当前主线逐步补齐，先完成 Java 主线基础，再进入这条支线`); } else toast(`先完成第 ${String(index).padStart(2, '0')} 阶段的学习、练习和测验，再解锁这里`); }));
     };
     const renderProgress = () => {
       const done = state.taskCompleted ? 2 : 1;
       const percentage = state.taskCompleted ? 5 : state.progress;
       document.getElementById('progressNumber').textContent = `${percentage}%`;
       document.getElementById('progressFill').style.width = `${percentage}%`;
-      document.getElementById('progressDone').textContent = `${done} / 40 单元`;
+      const selectedTrack = trackData[state.track] || trackData.java;
+      document.getElementById('progressDone').textContent = `${done} / ${selectedTrack.units.length} 阶段`;
       document.getElementById('reproducedStat').textContent = state.reproduced;
       document.getElementById('practiceStat').textContent = state.practice;
-      const trackTotal = (trackData[state.track] || trackData.java).count.split('/')[1].trim();
+      const trackTotal = (trackData[state.track] || trackData.java).units.length;
       document.getElementById('roadmapReproduced').textContent = `${state.reproduced} / ${trackTotal}`;
       document.getElementById('roadmapPractice').textContent = `${state.practice} / ${trackTotal}`;
       document.getElementById('archiveUnits').textContent = done;
@@ -843,6 +918,7 @@
       toast(`测验完成：${score} / ${activeQuizQuestions.length}`);
     };
     const openTask = () => { state.taskStarted = true; saveState(); switchView('task'); };
+    const continueRoadmap = () => { if (state.track === 'java') openTask(); else toast(`${trackData[state.track].title}会在 Java 主线基础完成后进入，当前先按阶段地图学习和准备数据`); };
     const openAIWithNote = (note) => { openModal('aiModal'); document.getElementById('aiQuestion').value = `我在学习 Java 第 01 单元时遇到“${note.type}”。\n\n实际现象：${note.actual || '未填写'}\n期待结果：${note.expected || '未填写'}\n已经尝试：${note.tried || '未填写'}\n\n请先给我排查思路和验证动作，不要直接给完整答案，也不要声称已经运行我的代码。`; updateAIPrompt(); };
     const updateAIPrompt = () => { const question = document.getElementById('aiQuestion').value.trim(); document.getElementById('aiPromptPreview').textContent = `请根据下面的学习任务，先给我排查思路和验证动作，不要声称已经运行我的代码。\n\n当前任务：让 Java 程序读取一个名字并输出问候\n我的问题：${question || '（待补充）'}\n\n请特别说明：下一步在哪里操作、预期看到什么，以及如何确认修改有效。`; };
     const exportData = () => { const payload = { exportedAt: new Date().toISOString(), product: '实战学习空间', note: '这是浏览器本地记录快照，不包含本地 Java 代码文件，也不代表平台已执行代码。', state }; const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json;charset=utf-8' }); const url = URL.createObjectURL(blob); const link = document.createElement('a'); link.href = url; link.download = `学习成果快照-${new Date().toISOString().slice(0,10)}.json`; link.click(); URL.revokeObjectURL(url); toast('成果快照已导出'); };
@@ -852,7 +928,7 @@
     document.querySelectorAll('[data-track]').forEach(button => button.addEventListener('click', () => { state.track = button.dataset.track; saveState(); renderUnits(); toast(`已切换到${trackData[state.track].title}路线`); }));
     document.querySelectorAll('[data-quiz]').forEach(button => button.addEventListener('click', () => openQuiz(button.dataset.quiz)));
     document.getElementById('submitQuizBtn').onclick = submitQuiz;
-    document.getElementById('continueBtn').onclick = openTask; document.getElementById('roadmapContinue').onclick = openTask; document.getElementById('projectTaskBtn').onclick = openTask; document.getElementById('archiveTaskBtn').onclick = openTask;
+    document.getElementById('continueBtn').onclick = openTask; document.getElementById('roadmapContinue').onclick = continueRoadmap; document.getElementById('projectTaskBtn').onclick = openTask; document.getElementById('archiveTaskBtn').onclick = openTask;
     document.getElementById('backHome').onclick = () => switchView('home'); document.getElementById('helpBtn').onclick = () => openModal('problemModal'); document.getElementById('stuckBtn').onclick = () => openModal('problemModal'); document.getElementById('problemBtn').onclick = () => openModal('problemModal'); document.getElementById('newNoteBtn').onclick = () => openModal('problemModal');
     document.getElementById('exportBtn').onclick = exportData; document.getElementById('archiveExportBtn').onclick = exportData; document.getElementById('archiveInfoBtn').onclick = () => toast('导出的是平台记录快照；代码请另行归档'); document.getElementById('menuBtn').onclick = () => document.getElementById('sidebar').classList.toggle('open');
     document.querySelectorAll('[data-close]').forEach(button => button.onclick = () => closeModal(button.dataset.close));
