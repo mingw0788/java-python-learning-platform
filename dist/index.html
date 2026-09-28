@@ -33,7 +33,7 @@
     body {
       margin: 0;
       color: var(--ink);
-      background: var(--paper);
+      background: radial-gradient(circle at 80% -10%, rgba(244,123,66,.08), transparent 28%), var(--paper);
       font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif;
       font-size: 16px;
       line-height: 1.55;
@@ -99,6 +99,47 @@
     .intro-row { display: flex; justify-content: space-between; gap: 20px; align-items: end; margin-bottom: 26px; }
     .intro-row p { color: var(--muted); margin: 0; }
     .date-note { color: var(--muted); font-size: 13px; padding-bottom: 4px; white-space: nowrap; }
+    .career-grid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(270px, .75fr); gap: 18px; margin-bottom: 18px; }
+    .career-banner { color: #fff; min-height: 178px; overflow: hidden; position: relative; background: linear-gradient(120deg, #142743 0%, #244b68 55%, #2d756e 100%); border: 0; }
+    .career-banner:before { content: ""; position: absolute; width: 210px; height: 210px; border: 1px solid rgba(255,255,255,.12); border-radius: 50%; right: -48px; top: -82px; box-shadow: 0 0 0 20px rgba(255,255,255,.035), 0 0 0 48px rgba(255,255,255,.025); }
+    .career-content { position: relative; z-index: 1; padding: 22px 24px; }
+    .career-label { color: #ffd0ba; font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+    .career-banner h2 { font-size: 24px; margin: 9px 0 5px; letter-spacing: -.04em; }
+    .career-banner p { color: #c3d8df; font-size: 13px; margin-bottom: 14px; max-width: 560px; }
+    .stack-pills { display: flex; flex-wrap: wrap; gap: 7px; }
+    .stack-pills span { color: #e8f2f0; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.13); border-radius: 99px; padding: 5px 9px; font-size: 11px; }
+    .signal-card { padding: 20px; }
+    .signal-card h3 { margin-bottom: 4px; }
+    .signal-card p { color: var(--muted); font-size: 12px; margin-bottom: 14px; }
+    .signal-row { display: flex; align-items: center; gap: 9px; margin: 10px 0; }
+    .signal-row > span { width: 78px; color: var(--muted); font-size: 12px; }
+    .signal-meter { flex: 1; height: 7px; background: #edf1f5; border-radius: 99px; overflow: hidden; }
+    .signal-meter i { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--orange), #ffb26e); }
+    .signal-row strong { width: 32px; text-align: right; font-size: 12px; }
+    .goal-select { width: 100%; border: 1px solid var(--line); background: #fbfcfe; color: var(--ink); border-radius: 9px; padding: 8px 9px; font-weight: 700; font-size: 13px; }
+    .micro-copy { color: var(--muted); font-size: 12px; }
+    .quiz-board { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+    .quiz-card { padding: 18px; min-height: 228px; display: flex; flex-direction: column; border-top: 3px solid var(--orange); }
+    .quiz-card.python { border-top-color: var(--teal); }
+    .quiz-card.crawler { border-top-color: #5966b5; }
+    .quiz-card h3 { font-size: 16px; margin: 12px 0 5px; }
+    .quiz-card p { color: var(--muted); font-size: 13px; margin-bottom: 12px; }
+    .quiz-card .quiz-meta { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; margin-bottom: 13px; }
+    .quiz-meta span { color: var(--muted); background: #f4f6f8; border-radius: 99px; padding: 4px 7px; font-size: 11px; }
+    .quiz-score { color: var(--teal); font-size: 12px; font-weight: 800; margin-bottom: 8px; min-height: 18px; }
+    .quiz-icon { width: 36px; height: 36px; display: grid; place-items: center; border-radius: 11px; background: var(--orange-soft); color: var(--orange); font-weight: 800; }
+    .quiz-card.python .quiz-icon { background: var(--teal-soft); color: var(--teal); }
+    .quiz-card.crawler .quiz-icon { background: #eef0ff; color: #5966b5; }
+    .quiz-notice { border-left: 3px solid var(--blue); background: var(--blue-soft); color: #36558e; border-radius: 10px; padding: 12px 14px; font-size: 12px; margin: 17px 0 0; }
+    .quiz-question { border: 1px solid var(--line); border-radius: 13px; padding: 15px; margin-bottom: 12px; }
+    .quiz-question h3 { font-size: 14px; line-height: 1.5; margin-bottom: 11px; }
+    .answer-option { display: flex; gap: 8px; align-items: start; padding: 9px 10px; border-radius: 9px; background: #f8fafc; margin-top: 7px; font-size: 13px; cursor: pointer; }
+    .answer-option:hover { background: #f0f4f8; }
+    .answer-option input { accent-color: var(--orange); margin-top: 3px; }
+    .quiz-result { border-radius: 13px; padding: 16px; background: var(--teal-soft); color: #21665e; margin-top: 15px; }
+    .quiz-result strong { display: block; font-size: 22px; letter-spacing: -.04em; }
+    .quiz-result p { font-size: 13px; margin: 4px 0 0; }
+    .profile-badge { color: var(--muted); background: #f2f5f8; border-radius: 99px; padding: 6px 10px; font-size: 11px; font-weight: 700; }
 
     .grid { display: grid; gap: 18px; }
     .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
@@ -308,6 +349,7 @@
       .topbar, .main-content { padding-left: 28px; padding-right: 28px; }
       .dashboard-grid { grid-template-columns: 1fr; }
       .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .quiz-board { grid-template-columns: 1fr; }
     }
     @media (max-width: 760px) {
       .app-shell { display: block; }
@@ -323,6 +365,7 @@
       .route-list { grid-template-columns: repeat(4, 1fr); row-gap: 12px; }
       .route-step:nth-child(5) { grid-column: 1; }
       .archive-summary { grid-template-columns: repeat(2, 1fr); }
+      .career-grid { grid-template-columns: 1fr; }
       .project-library { grid-template-columns: 1fr; }
       .learning-sequence, .track-inventory { grid-template-columns: repeat(2, 1fr); }
       .practice-board { grid-template-columns: 1fr; }
@@ -352,6 +395,7 @@
         <button class="active" data-view="home"><span class="nav-icon">⌂</span><span>今天</span></button>
         <button data-view="roadmap"><span class="nav-icon">◎</span><span>学习路线</span></button>
         <button data-view="projects"><span class="nav-icon">▣</span><span>项目实战</span></button>
+        <button data-view="tests"><span class="nav-icon">✓</span><span>阶段测验</span></button>
         <button data-view="notes"><span class="nav-icon">⌁</span><span>问题笔记</span></button>
         <button data-view="archive"><span class="nav-icon">□</span><span>成果档案</span></button>
       </nav>
@@ -369,12 +413,13 @@
     <main class="main">
       <header class="topbar">
         <div style="display:flex;align-items:center;gap:12px"><button class="icon-btn mobile-menu" id="menuBtn" aria-label="打开导航">☰</button><div class="breadcrumb">我的学习 / <strong id="crumb">今天</strong></div></div>
-        <div class="top-actions"><button class="icon-btn" id="helpBtn" aria-label="记录问题" title="我卡住了">?</button><button class="icon-btn" id="exportBtn" aria-label="导出成果" title="导出成果">↓</button><div class="avatar" aria-label="林同学">林</div></div>
+        <div class="top-actions"><span class="profile-badge">大四 · 软件工程</span><button class="icon-btn" id="helpBtn" aria-label="记录问题" title="我卡住了">?</button><button class="icon-btn" id="exportBtn" aria-label="导出成果" title="导出成果">↓</button><div class="avatar" aria-label="林同学">林</div></div>
       </header>
 
       <div class="main-content">
         <section class="view active" id="view-home">
-          <div class="intro-row"><div><div class="eyebrow">星期一 · 继续前进</div><h1>林同学，今天做一个小成果。</h1><p>不用先把整套环境装齐，完成下面这一步，就能让设备台账真正开始工作。</p></div><div class="date-note">2026 年 9 月 28 日 · 还剩 3 个待办</div></div>
+          <div class="intro-row"><div><div class="eyebrow">星期一 · 求职训练第 1 周</div><h1>林同学，今天做一个能写进简历的成果。</h1><p>你不是在收集课程，而是在建立企业开发需要的证据：能读需求、能写代码、能测边界、能说明自己做了什么。</p></div><div class="date-note">2026 年 9 月 28 日 · 还剩 3 个待办</div></div>
+          <div class="career-grid"><article class="card career-banner"><div class="career-content"><div class="career-label">你的就业目标</div><h2>Java 后端开发实习 / 校招</h2><p>主线围绕企业项目最常见的能力组织：Java、Spring Boot、SQL、REST API、Git、测试、日志和需求变更。</p><div class="stack-pills"><span>Java LTS</span><span>Spring Boot</span><span>MySQL / SQL</span><span>REST API</span><span>Git + 测试</span></div></div></article><article class="card signal-card"><h3>岗位能力雷达</h3><p>先补能影响面试和入职上手的短板。</p><div class="signal-row"><span>Java 基础</span><div class="signal-meter"><i style="width:22%"></i></div><strong>22%</strong></div><div class="signal-row"><span>SQL / 数据库</span><div class="signal-meter"><i style="width:10%"></i></div><strong>10%</strong></div><div class="signal-row"><span>接口开发</span><div class="signal-meter"><i style="width:5%"></i></div><strong>5%</strong></div><div class="signal-row"><span>项目交付</span><div class="signal-meter"><i style="width:8%"></i></div><strong>8%</strong></div><button class="ghost-btn" data-view-link="tests">用测验找到缺口 →</button></article></div>
           <div class="dashboard-grid">
             <div class="grid" style="gap:18px">
               <article class="card task-hero">
@@ -395,6 +440,7 @@
 
         <section class="view" id="view-projects"><div class="intro-row"><div><div class="eyebrow">项目实战</div><h1>每条路线都要有能交付的项目</h1><p>先学知识与示例，再做引导练习，最后用陌生数据完成独立需求变更。</p></div><div class="date-note">8 个项目规划 · 12 个独立变更</div></div><div class="grid grid-2"><article class="card project-card"><span class="project-kicker">Java 项目 01 · 进行中</span><h3>设备台账工具</h3><p>从 CSV 导入、字段校验到查询和导出，练习把一份业务说明拆成可运行的 Java 小工具。</p><div class="project-progress"><i class="done"></i><i class="current"></i><i></i><i></i><i></i></div><div class="project-foot"><span>1 / 5 个里程碑</span><span>命令行阶段</span></div><div class="milestone-list"><div class="milestone done"><i>✓</i><span>读懂需求与样例数据</span></div><div class="milestone current"><i></i><span>导入并校验设备编号</span></div><div class="milestone"><i></i><span>保存、查询与导出</span></div><div class="milestone"><i></i><span>失败记录与测试</span></div><div class="milestone"><i></i><span>整理运行说明与复盘</span></div></div><button class="primary-btn" style="margin-top:15px" id="projectTaskBtn">继续项目任务</button></article><article class="card project-card"><span class="project-kicker" style="color:var(--blue);background:var(--blue-soft)">Java 项目 02 · 待开始</span><h3>设备借用管理后端</h3><p>升级为多人使用的接口服务，练习角色权限、状态变化、重复提交、事务和交付说明。</p><div class="project-progress"><i></i><i></i><i></i><i></i><i></i></div><div class="project-foot"><span>0 / 6 个里程碑</span><span>Spring Boot · SQL</span></div><div class="milestone-list"><div class="milestone"><i></i><span>澄清角色、字段与业务规则</span></div><div class="milestone"><i></i><span>设计表结构与初始化脚本</span></div><div class="milestone"><i></i><span>实现查询与借用接口</span></div><div class="milestone"><i></i><span>处理审批、归还与权限</span></div><div class="milestone"><i></i><span>补充异常用例与回归检查</span></div><div class="milestone"><i></i><span>交付代码、说明与复盘</span></div></div><button class="secondary-btn" style="margin-top:15px" disabled>完成项目 01 后解锁</button></article></div><article class="card list-card" style="margin-top:18px"><div class="section-head"><div><h2>完整项目库</h2><p>项目按“知识准备 → 示例复现 → 引导练习 → 独立交付”组织，不只堆项目名称。</p></div><span class="project-kicker" style="color:var(--muted);background:#f1f3f6">规划中 · 待逐项验证</span></div><div class="project-library"><article class="project-mini-card"><span class="project-kicker">Java · 业务工具</span><h3>会议室预约管理</h3><p>处理时间冲突、重复提交、取消和查询筛选，练习集合、异常与业务规则。</p><div class="project-detail"><span>先修：集合 / 异常</span><span>交付：CLI + 测试</span></div></article><article class="project-mini-card"><span class="project-kicker">Java · 后端接口</span><h3>工单与 SLA 管理 API</h3><p>从需求澄清到接口、状态流转、角色权限和日志排错，完成一套可调用后端。</p><div class="project-detail"><span>先修：SQL / HTTP</span><span>交付：API + 文档</span></div></article><article class="project-mini-card"><span class="project-kicker">Java · 数据库</span><h3>课程作业提交与评审</h3><p>设计学生、作业、提交版本和评语关联，练习事务、权限边界与回归检查。</p><div class="project-detail"><span>先修：事务 / 权限</span><span>交付：脚本 + 测试</span></div></article><article class="project-mini-card"><span class="project-kicker" style="color:var(--teal);background:var(--teal-soft)">Python · 文件自动化</span><h3>多表合并与数据清洗工具</h3><p>合并多份 CSV / Excel，处理缺失、重复、日期格式和错误行，输出可追溯结果。</p><div class="project-detail"><span>先修：路径 / CSV</span><span>交付：脚本 + 报告</span></div></article><article class="project-mini-card"><span class="project-kicker" style="color:var(--teal);background:var(--teal-soft)">Python · 业务报表</span><h3>销售数据周报生成器</h3><p>读取订单数据，按规则统计并生成报表，记录输入口径、失败记录和输出版本。</p><div class="project-detail"><span>先修：字典 / JSON</span><span>交付：报表 + 说明</span></div></article><article class="project-mini-card"><span class="project-kicker" style="color:var(--teal);background:var(--teal-soft)">Python · 接口取数</span><h3>公开 API 数据巡检</h3><p>调用授权接口，处理超时、有限重试、分页和结果核对，保存结构化数据。</p><div class="project-detail"><span>先修：HTTP / JSON</span><span>交付：日志 + 数据</span></div></article><article class="project-mini-card"><span class="project-kicker" style="color:#4c5ba8;background:#eef0ff">爬虫 · 练习站</span><h3>分页列表采集与去重</h3><p>在可控练习站采集分页数据，加入请求间隔、去重、失败记录和增量保存。</p><div class="project-detail"><span>先修：HTTPX / 解析</span><span>交付：CSV + 日志</span></div></article><article class="project-mini-card"><span class="project-kicker" style="color:#4c5ba8;background:#eef0ff">爬虫 · 动态页面</span><h3>公共数据检索助手</h3><p>针对授权公开数据，识别静态与动态场景，按需使用 Playwright 并保留来源与核对结果。</p><div class="project-detail"><span>先修：分页 / 存储</span><span>交付：来源 + 结果</span></div></article></div><div class="content-notice">爬虫路线只使用授权来源或练习站，重点学习请求、解析、分页、去重、增量、有限重试和日志；不把验证码绕过、对抗封禁或采集个人资料作为课程目标。</div></article><article class="card list-card" style="margin-top:18px"><div class="section-head"><div><h2>独立需求变更</h2><p>每个项目至少准备 3 个条件不同的变更，完成其中 1 个后才能记录为独立交付。</p></div><span class="project-kicker" style="color:var(--muted);background:#f1f3f6">12 题规划</span></div><div class="practice-board"><div class="practice-card"><h3>Java 变更题</h3><p>从设备借用项目选择一项：</p><ul><li>增加预约并处理时间冲突</li><li>增加延期申请与审批</li><li>增加批量导入错误清单</li></ul></div><div class="practice-card"><h3>Python / 爬虫变更题</h3><p>从数据工具选择一项：</p><ul><li>输入文件增加缺失列</li><li>接口分页顺序发生变化</li><li>重复运行不得重复写入</li></ul></div></div></article></section>
 
+        <section class="view" id="view-tests"><div class="intro-row"><div><div class="eyebrow">阶段测验 · 不是背题</div><h1>用小测验找出真正的薄弱点</h1><p>每套测验都贴近工作中的判断：选什么数据结构、如何设计约束、接口失败怎么处理、采集任务如何避免重复。</p></div><div class="date-note">完成后生成复习建议</div></div><div class="quiz-board"><article class="card quiz-card"><div class="quiz-icon">J</div><h3>Java 基础与业务判断</h3><p>从集合、异常、对象职责到重复数据校验，检查你能否把语法放进业务情境。</p><div class="quiz-score" id="quizScore-java">尚未完成</div><div class="quiz-meta"><span>5 题</span><span>约 8 分钟</span><span>Java 后端</span></div><button class="primary-btn" data-quiz="java">开始测验</button></article><article class="card quiz-card python"><div class="quiz-icon">Py</div><h3>Python 数据处理与接口</h3><p>检查文件编码、字典映射、缺失数据、异常处理和 API 失败重试等实用判断。</p><div class="quiz-score" id="quizScore-python">尚未完成</div><div class="quiz-meta"><span>5 题</span><span>约 8 分钟</span><span>Python</span></div><button class="primary-btn" data-quiz="python" style="background:var(--teal)">开始测验</button></article><article class="card quiz-card crawler"><div class="quiz-icon">↗</div><h3>爬虫与数据采集基础</h3><p>检查请求边界、分页停止、去重、限速、有限重试和来源记录等工作习惯。</p><div class="quiz-score" id="quizScore-crawler">尚未完成</div><div class="quiz-meta"><span>5 题</span><span>约 8 分钟</span><span>数据采集</span></div><button class="primary-btn" data-quiz="crawler" style="background:#5966b5">开始测验</button></article></div><div class="quiz-notice">测验结果只用于安排下一次学习，不是“聪明 / 不聪明”的标签，也不是企业认证。答错后会看到原因、关联单元和一个建议练习；使用提示后完成，仍会记录为“有帮助完成”。</div><article class="card list-card" style="margin-top:18px"><div class="section-head"><div><h2>企业开发能力检查清单</h2><p>这些能力会贯穿项目和后续面试复盘。</p></div><span class="project-kicker">先理解，再熟练</span></div><div class="grid grid-3"><div class="note-block"><strong>写得出来</strong><p>能把需求拆成输入、输出、规则和边界，写出可读代码。</p></div><div class="note-block"><strong>跑得稳定</strong><p>能处理脏数据、异常、重复操作、失败重试和日志定位。</p></div><div class="note-block"><strong>交付得清楚</strong><p>能写启动说明、接口说明、测试记录和已知限制，让别人接手。</p></div></div></article></section>
         <section class="view" id="view-notes"><div class="intro-row"><div><div class="eyebrow">问题笔记</div><h1>把卡住的地方变成下次可复用的线索</h1><p>记录现象、预期、已尝试动作和实际原因；不知道的项可以留空。</p></div><button class="primary-btn" id="newNoteBtn">记录新问题</button></div><div class="note-layout"><article class="card list-card"><div class="section-head"><div><h2>我的问题</h2><p>保存后可继续编辑和导出。</p></div></div><div id="notesList"></div></article><article class="card archive-card note-detail" id="noteDetail"><h2>还没有选中的问题</h2><p class="note-meta">记录一次问题后，这里会显示排查上下文。</p><div class="empty">把“运行不了”拆成现象与预期，下一步就会更清楚。</div></article></div></section>
 
         <section class="view" id="view-archive"><div class="intro-row"><div><div class="eyebrow">成果档案</div><h1>离开平台，也能带走你的过程</h1><p>成果包含任务版本、运行说明、检查记录、笔记和帮助来源，不把仓库链接冒充代码备份。</p></div><button class="primary-btn" id="archiveExportBtn">导出我的成果</button></div><article class="card archive-card"><div class="archive-summary"><div class="archive-metric"><strong id="archiveUnits">1</strong><span>已开始单元</span></div><div class="archive-metric"><strong id="archivePractice">0</strong><span>已完成练习</span></div><div class="archive-metric"><strong id="archiveNotes">0</strong><span>问题记录</span></div><div class="archive-metric"><strong>1</strong><span>项目进行中</span></div></div><div class="archive-line"><div><strong>Java 第 01 单元 · 输入与输出</strong><span>学习版本 v0.1 · 阅读已记录 · 实践尚未提交</span></div><button class="secondary-btn" id="archiveTaskBtn">查看任务</button></div><div class="archive-line"><div><strong>设备台账工具 · 需求与样例数据</strong><span>阶段成果 · 本地记录 · 需要继续补充测试说明</span></div><button class="secondary-btn" id="archiveProjectBtn">打开项目</button></div><div class="archive-line"><div><strong>导出说明</strong><span>导出的 JSON 是平台记录快照；本地 Java 代码需要你另行归档或推送到仓库。</span></div><button class="ghost-btn" id="archiveInfoBtn">了解更多</button></div></article><article class="card task-section" style="margin-top:18px"><h2>交付检查清单</h2><div class="check-list"><div class="check-row"><input type="checkbox" id="deliver1"><label for="deliver1">代码或仓库位置已经记录，并知道这不是平台备份</label></div><div class="check-row"><input type="checkbox" id="deliver2"><label for="deliver2">别人可以按运行说明完成初始化、启动和核心操作</label></div><div class="check-row"><input type="checkbox" id="deliver3"><label for="deliver3">关键业务规则与异常用例有测试记录</label></div><div class="check-row"><input type="checkbox" id="deliver4"><label for="deliver4">我写下了一个问题的原因、修复和验证动作</label></div></div></article></section>
@@ -408,7 +454,17 @@
 
   <div class="modal-backdrop" id="problemModal" role="dialog" aria-modal="true" aria-labelledby="problemModalTitle"><div class="modal"><div class="modal-head"><div><div class="eyebrow">问题整理</div><h2 id="problemModalTitle">先把卡住的地方说清楚</h2></div><button class="close-btn" data-close="problemModal" aria-label="关闭">×</button></div><p style="color:var(--muted);font-size:13px">不知道的项可以留空。记录本身不会让任务失败，先保存现场，之后再从下一小步恢复。</p><div class="form-grid"><div class="field"><label for="problemType">我遇到的是</label><select id="problemType"><option>安装不了</option><option>程序打不开</option><option>运行报错</option><option>结果不对</option><option>不知道从哪里写</option></select></div><div class="field"><label for="problemExpected">我原本期待看到什么？</label><input id="problemExpected" placeholder="例如：修改名字后，输出也跟着变化" /></div><div class="field"><label for="problemActual">实际发生了什么？</label><textarea id="problemActual" placeholder="粘贴必要的错误片段或描述现象，不要包含密码和密钥"></textarea></div><div class="field"><label for="problemTried">我已经尝试过</label><textarea id="problemTried" placeholder="例如：重新运行、检查了文件名、换了一个名字"></textarea></div><div class="field"><label for="problemNext">下一小步（可以先不填）</label><input id="problemNext" placeholder="例如：确认终端当前路径里有 Hello.java" /></div></div><div class="button-row" style="justify-content:flex-end;margin-top:18px"><button class="secondary-btn" data-close="problemModal">取消</button><button class="primary-btn" id="saveProblemBtn">保存问题</button></div></div></div>
 
+当前任务：让 Java 程序读取一个名字并输出问候
+我的问题：
+我已尝试：
+请特别说明：下一步在哪里操作、预期看到什么。</div></div><div class="button-row" style="justify-content:flex-end;margin-top:18px"><button class="secondary-btn" id="copyPromptBtn">复制提问文本</button><a class="secondary-btn" href="https://chat.deepseek.com/" target="_blank" rel="noreferrer">打开 DeepSeek ↗</a><button class="primary-btn" id="saveAiBtn">保存为待验证笔记</button></div><p style="color:var(--muted);font-size:12px;margin:13px 0 0">外部网页辅助不会自动回传回答。粘贴回来的内容应标记为“待验证”，并关联一次实际检查。</p></div></div>
+  <div class="modal-backdrop" id="quizModal" role="dialog" aria-modal="true" aria-labelledby="quizModalTitle"><div class="modal"><div class="modal-head"><div><div class="eyebrow">阶段测验</div><h2 id="quizModalTitle">测一测你的判断</h2></div><button class="close-btn" data-close="quizModal" aria-label="关闭">×</button></div><p style="color:var(--muted);font-size:13px">选择你认为最适合企业项目的做法。提交后会显示解释和下一步，不会自动把任何课程标记为掌握。</p><div id="quizQuestions"></div><div class="button-row" style="justify-content:flex-end;margin-top:18px"><button class="secondary-btn" data-close="quizModal">稍后再做</button><button class="primary-btn" id="submitQuizBtn">提交答案</button></div><div id="quizResult"></div></div></div>
+
   <div class="modal-backdrop" id="aiModal" role="dialog" aria-modal="true" aria-labelledby="aiModalTitle"><div class="modal"><div class="modal-head"><div><div class="eyebrow">AI 学习答疑</div><h2 id="aiModalTitle">带着当前任务去提问</h2></div><button class="close-btn" data-close="aiModal" aria-label="关闭">×</button></div><div class="ai-context"><strong>当前任务上下文</strong>第 01 单元 · 输入、运行与解释结果。平台不会自动执行你的代码，也不会把 AI 回答直接记为任务通过。</div><div class="field"><label for="aiQuestion">你希望获得什么帮助？</label><textarea id="aiQuestion" placeholder="例如：我在 Windows PowerShell 里运行 Hello.java 时出现……我已经尝试了……请先给我排查思路，不要直接给完整答案。"></textarea></div><div style="margin-top:14px"><label style="display:block;font-size:13px;font-weight:700;margin-bottom:6px">可复制的提问文本</label><div class="copy-area" id="aiPromptPreview">请根据下面的学习任务，先给我排查思路和验证动作，不要声称已经运行我的代码。
+当前任务：让 Java 程序读取一个名字并输出问候
+我的问题：
+我已尝试：
+请特别说明：下一步在哪里操作、预期看到什么。</div></div><div class="button-row" style="justify-content:flex-end;margin-top:18px"><button class="secondary-btn" id="copyPromptBtn">复制提问文本</button><a class="secondary-btn" href="https://chat.deepseek.com/" target="_blank" rel="noreferrer">打开 DeepSeek ↗</a><button class="primary-btn" id="saveAiBtn">保存为待验证笔记</button></div><p style="color:var(--muted);font-size:12px;margin:13px 0 0">外部网页辅助不会自动回传回答。粘贴回来的内容应标记为“待验证”，并关联一次实际检查。</p></div></div>
 
 当前任务：让 Java 程序读取一个名字并输出问候
 我的问题：
@@ -418,7 +474,7 @@
   <div class="toast" id="toast" role="status"></div>
   <script>
     const stateKey = 'learning-space-state-v1';
-    const defaultState = { selectedMinutes: 15, progress: 3, reproduced: 0, practice: 0, problem: null, notes: [], taskStarted: false, taskCompleted: false, track: 'java' };
+    const defaultState = { selectedMinutes: 15, progress: 3, reproduced: 0, practice: 0, problem: null, notes: [], taskStarted: false, taskCompleted: false, track: 'java', quizScores: {} };
     let state = { ...defaultState, ...JSON.parse(localStorage.getItem(stateKey) || '{}') };
     const trackData = {
       java: {
@@ -456,16 +512,40 @@
         ]
       }
     };
+    const quizData = {
+      java: { title: 'Java 基础与业务判断', questions: [
+        { text: '设备编号不能重复，导入时还要快速判断某编号是否已经出现。更合适的基础选择是？', options: ['只用 ArrayList 顺序遍历', '用 HashSet / Set 保存已出现编号', '把编号拼成一个超长字符串', '每次都重启程序再检查'], answer: 1, why: 'Set 表达“不允许重复”的业务约束，查询是否存在也比逐条遍历更直接。', next: '复习 Java 集合与设备导入的重复记录练习。' },
+        { text: '用户提交一个空的设备编号，接口应拒绝并提示输入问题。这个判断更接近哪一层？', options: ['数据库完全不需要校验', '输入校验与业务边界检查', '只在日志里打印一下', '让前端静默忽略'], answer: 1, why: '输入校验应尽早反馈；数据库约束仍需要保留，不能只依赖某一层。', next: '复习必填字段、数据库约束和统一错误反馈。' },
+        { text: '借用申请写入成功，但操作日志写入失败，不能留下“业务成功、审计缺失”的半成品。优先考虑？', options: ['忽略日志错误', '用事务保证相关写入的一致性', '把错误藏在前端', '重复点击提交'], answer: 1, why: '事务让一组相关操作要么一起成功，要么一起回滚，适合处理状态和记录必须一致的场景。', next: '进入数据库事务与失败回滚单元。' },
+        { text: '接口收到格式正确但业务上已被借出的设备，应该如何处理？', options: ['返回成功并覆盖旧借用', '返回明确业务错误，不改变原状态', '直接抛出空指针', '删除旧记录'], answer: 1, why: '格式正确不等于业务允许；重复借用需要可解释的业务错误，原状态不能被悄悄破坏。', next: '复习状态机、重复提交和异常用例。' },
+        { text: '同事接手项目，最能帮助他启动并验证的交付组合是？', options: ['只有一张截图', '只有仓库链接', '运行说明、配置示例、初始化脚本和测试记录', '只告诉他“安装最新版”'], answer: 2, why: '可复现的启动路径和检查证据比截图更接近真实交付，也能暴露环境和配置缺口。', next: '完成项目交付与修改单元。' }
+      ]},
+      python: { title: 'Python 数据处理与接口', questions: [
+        { text: '合并多份 CSV 时，每行字段数量不一致，最可靠的第一步是？', options: ['直接按下标取值，出错就跳过', '记录文件名、行号和缺失字段，再决定是否进入错误清单', '把所有空值都填成 0', '删除整份文件'], answer: 1, why: '错误数据需要可定位、可解释；文件名和行号是后续修复与复核的关键上下文。', next: '复习 CSV 字段校验与错误清单。' },
+        { text: '想根据设备编号快速找到设备名称和负责人，适合使用哪种结构？', options: ['字典 dict，以设备编号为键', '嵌套很多 if/else', '一个很长的字符串', '随机数列表'], answer: 0, why: '字典表达“键 → 值”的映射，能让代码更贴近业务含义。', next: '复习 Python 字典与函数拆分。' },
+        { text: '调用外部 API 时网络偶发超时，合理的处理是？', options: ['无限重试', '有限重试、超时设置和失败记录', '把超时当作成功', '删除请求日志'], answer: 1, why: '生产脚本需要有边界的失败处理，避免卡死、重复请求或无法追查。', next: '进入 HTTP 请求、超时和有限重试单元。' },
+        { text: '报表中的“销售额”统计口径不清时，最应该先做什么？', options: ['直接写代码猜一个口径', '确认字段、金额单位、时间范围和去重规则', '先换一个库', '先做漂亮图表'], answer: 1, why: '数据任务的正确性来自口径和规则，库只能帮助实现，不能替你确认业务含义。', next: '复习需求澄清卡与数据字典。' },
+        { text: '脚本需要在别人的电脑上运行，哪种做法最有交付价值？', options: ['只发 .py 文件', '说明 Python 版本、依赖安装、输入输出和失败处理', '把路径写死成自己的桌面', '让对方自己猜参数'], answer: 1, why: '环境、依赖、输入输出和失败行为齐全，别人才能复现和修改。', next: '整理 Python 自动化项目交付材料。' }
+      ]},
+      crawler: { title: '爬虫与数据采集基础', questions: [
+        { text: '准备采集一个公开练习站的分页列表，第一步最重要的不是“开浏览器”，而是？', options: ['确认来源授权、访问范围和数据用途', '直接提高并发', '关闭所有日志', '先绕过验证码'], answer: 0, why: '采集先要明确合法、授权和边界；技术实现不能替代来源确认。', next: '复习来源登记、请求间隔与采集边界。' },
+        { text: '分页接口返回空列表时，通常可以作为哪种信号？', options: ['继续无限请求', '根据已确认规则停止分页', '删除之前结果', '重复请求一百次'], answer: 1, why: '停止条件应来自接口规则或数据结果，避免无意义请求和任务无法结束。', next: '练习分页参数、停止条件和失败页记录。' },
+        { text: '重复运行采集任务不应产生重复业务记录，需要先定义什么？', options: ['浏览器颜色', '稳定的唯一键和去重策略', '更长的变量名', '更多 print'], answer: 1, why: '去重必须有明确的业务唯一键，例如来源 ID 或组合键，不能靠随机判断。', next: '进入去重、增量保存和断点恢复单元。' },
+        { text: '某一页请求返回 503，最合适的处理组合是？', options: ['无限高速重试', '超时、有限重试、退避或间隔，并记录失败页', '把这一页伪造成成功', '删掉所有已采集数据'], answer: 1, why: '失败处理要有边界、节奏和记录，之后才能补采或解释结果不完整。', next: '复习 HTTP 状态、重试和日志。' },
+        { text: '静态 HTML 已经能拿到所需字段，是否应该直接上 Playwright？', options: ['应该，工具越复杂越专业', '不必，先用更轻量的 HTTP + 解析方案', '改用无限多线程', '复制别人完整框架'], answer: 1, why: '浏览器自动化有更高成本；只有页面交互或 JS 渲染确实需要时再引入。', next: '复习静态与动态页面判断。' }
+      ]}
+    };
     const saveState = () => localStorage.setItem(stateKey, JSON.stringify(state));
     const toast = (message) => { const el = document.getElementById('toast'); el.textContent = message; el.classList.add('show'); clearTimeout(window.toastTimer); window.toastTimer = setTimeout(() => el.classList.remove('show'), 2600); };
     const switchView = (name) => {
       document.querySelectorAll('.view').forEach(view => view.classList.toggle('active', view.id === `view-${name}`));
       document.querySelectorAll('.nav button').forEach(button => button.classList.toggle('active', button.dataset.view === name));
-      const names = { home: '今天', roadmap: '学习路线', projects: '项目实战', notes: '问题笔记', archive: '成果档案', resources: '课程与资料', task: '当前任务' };
+      const names = { home: '今天', roadmap: '学习路线', projects: '项目实战', tests: '阶段测验', notes: '问题笔记', archive: '成果档案', resources: '课程与资料', task: '当前任务' };
       document.getElementById('crumb').textContent = names[name] || '今天';
       document.getElementById('sidebar').classList.remove('open');
       window.scrollTo({ top: 0, behavior: 'smooth' });
       if (name === 'roadmap') renderUnits();
+      if (name === 'tests') renderQuizScores();
       if (name === 'notes') renderNotes();
       if (name === 'archive') renderArchive();
     };
@@ -513,6 +593,25 @@
       document.querySelectorAll('[data-note-index]').forEach(item => item.addEventListener('click', () => showNote(Number(item.dataset.noteIndex)))); showNote(0);
     };
     const renderArchive = () => renderProgress();
+    const renderQuizScores = () => Object.keys(quizData).forEach(key => { const score = state.quizScores[key]; const el = document.getElementById(`quizScore-${key}`); if (el) el.textContent = score == null ? '尚未完成' : `最近得分：${score} / 5 · 已生成复习建议`; });
+    let activeQuiz = null;
+    const openQuiz = (key) => {
+      activeQuiz = key; const quiz = quizData[key];
+      document.getElementById('quizModalTitle').textContent = quiz.title;
+      document.getElementById('quizResult').innerHTML = '';
+      document.getElementById('quizQuestions').innerHTML = quiz.questions.map((question, index) => `<div class="quiz-question"><h3>${index + 1}. ${question.text}</h3>${question.options.map((option, optionIndex) => `<label class="answer-option"><input type="radio" name="quiz-${key}-${index}" value="${optionIndex}"><span>${option}</span></label>`).join('')}</div>`).join('');
+      openModal('quizModal');
+    };
+    const submitQuiz = () => {
+      const quiz = quizData[activeQuiz]; if (!quiz) return;
+      let score = 0; const missed = [];
+      quiz.questions.forEach((question, index) => { const selected = document.querySelector(`input[name="quiz-${activeQuiz}-${index}"]:checked`); if (selected && Number(selected.value) === question.answer) score += 1; else missed.push({ index, question }); });
+      if (document.querySelectorAll('#quizQuestions input:checked').length < quiz.questions.length) { toast('还有题目没有选择，先完成整套测验再提交'); return; }
+      state.quizScores[activeQuiz] = score; saveState(); renderQuizScores();
+      const recommendation = score >= 4 ? '基础判断已经有不错的起点，下一步把它放进项目代码和测试里。' : score >= 3 ? '核心概念有基础，建议回看错题关联单元，再做一次条件不同的练习。' : '先回到对应知识卡和示例，不急着堆项目数量；把每个错误判断写成一条复习笔记。';
+      document.getElementById('quizResult').innerHTML = `<div class="quiz-result"><strong>${score} / ${quiz.questions.length}</strong><p>${recommendation}</p>${missed.length ? `<div style="margin-top:11px;font-size:12px"><b>优先复习：</b>${missed.map(item => `${item.index + 1}. ${item.question.next}`).join('；')}</div>` : '<div style="margin-top:11px;font-size:12px"><b>下一步：</b>进入对应项目的引导练习，并用陌生数据再做一次。</div>'}</div>`;
+      toast(`测验完成：${score} / ${quiz.questions.length}`);
+    };
     const openTask = () => { state.taskStarted = true; saveState(); switchView('task'); };
     const openAIWithNote = (note) => { openModal('aiModal'); document.getElementById('aiQuestion').value = `我在学习 Java 第 01 单元时遇到“${note.type}”。\n\n实际现象：${note.actual || '未填写'}\n期待结果：${note.expected || '未填写'}\n已经尝试：${note.tried || '未填写'}\n\n请先给我排查思路和验证动作，不要直接给完整答案，也不要声称已经运行我的代码。`; updateAIPrompt(); };
     const updateAIPrompt = () => { const question = document.getElementById('aiQuestion').value.trim(); document.getElementById('aiPromptPreview').textContent = `请根据下面的学习任务，先给我排查思路和验证动作，不要声称已经运行我的代码。\n\n当前任务：让 Java 程序读取一个名字并输出问候\n我的问题：${question || '（待补充）'}\n\n请特别说明：下一步在哪里操作、预期看到什么，以及如何确认修改有效。`; };
@@ -521,6 +620,8 @@
     document.querySelectorAll('.nav button').forEach(button => button.addEventListener('click', () => switchView(button.dataset.view)));
     document.querySelectorAll('[data-view-link]').forEach(button => button.addEventListener('click', () => switchView(button.dataset.viewLink)));
     document.querySelectorAll('[data-track]').forEach(button => button.addEventListener('click', () => { state.track = button.dataset.track; saveState(); renderUnits(); toast(`已切换到${trackData[state.track].title}路线`); }));
+    document.querySelectorAll('[data-quiz]').forEach(button => button.addEventListener('click', () => openQuiz(button.dataset.quiz)));
+    document.getElementById('submitQuizBtn').onclick = submitQuiz;
     document.getElementById('continueBtn').onclick = openTask; document.getElementById('roadmapContinue').onclick = openTask; document.getElementById('projectTaskBtn').onclick = openTask; document.getElementById('archiveTaskBtn').onclick = openTask;
     document.getElementById('backHome').onclick = () => switchView('home'); document.getElementById('helpBtn').onclick = () => openModal('problemModal'); document.getElementById('stuckBtn').onclick = () => openModal('problemModal'); document.getElementById('problemBtn').onclick = () => openModal('problemModal'); document.getElementById('newNoteBtn').onclick = () => openModal('problemModal');
     document.getElementById('exportBtn').onclick = exportData; document.getElementById('archiveExportBtn').onclick = exportData; document.getElementById('archiveInfoBtn').onclick = () => toast('导出的是平台记录快照；代码请另行归档'); document.getElementById('menuBtn').onclick = () => document.getElementById('sidebar').classList.toggle('open');
@@ -533,7 +634,7 @@
     document.getElementById('envHelpBtn').onclick = () => { document.querySelector('[data-tab="hint"]').click(); toast('已切换到分层提示'); };
     document.getElementById('aiQuestion').addEventListener('input', updateAIPrompt); document.getElementById('copyPromptBtn').onclick = async () => { try { await navigator.clipboard.writeText(document.getElementById('aiPromptPreview').textContent); toast('提问文本已复制'); } catch { toast('复制失败，请手动选择文本'); } }; document.getElementById('saveAiBtn').onclick = () => { const text = document.getElementById('aiQuestion').value.trim(); if (!text) { toast('先写下你希望获得的帮助'); return; } state.notes.unshift({ type: 'AI 待验证建议', expected: '获得可执行的排查思路', actual: text, tried: '已整理当前任务上下文', next: '把外部回答粘贴回来，并记录实际检查结果', date: new Date().toLocaleDateString('zh-CN') }); saveState(); closeModal('aiModal'); renderProgress(); toast('已保存为待验证笔记，平台不会自动标记任务通过'); };
     document.addEventListener('keydown', event => { if (event.key === 'Escape') document.querySelectorAll('.modal-backdrop.open').forEach(modal => modal.classList.remove('open')); });
-    renderProgress(); renderProblem(); renderUnits(); renderNotes();
+    renderProgress(); renderProblem(); renderUnits(); renderNotes(); renderQuizScores();
   </script>
 </body>
 </html>
